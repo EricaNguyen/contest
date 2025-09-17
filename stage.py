@@ -33,7 +33,11 @@ class Stage:
     def printTurnOrderList(self):
         listSize = len(self.contestants)
         for i in range(0, listSize):
-            print(str(i+1) + " - " + self.contestants[i].name + " the " + self.contestants[i].species)
+            #print an asterisk in front of contestants that the audience is expecting a combo from
+            seperatorMark = " - "
+            if self.contestants[i].isExpectingCombo == True:
+                seperatorMark = " * "
+            print(str(i+1) + seperatorMark + self.contestants[i].name + " the " + self.contestants[i].species + " (Energy: " + str(self.contestants[i].pumpedUp) + ")")
     
     #return a list of Pokemon in the order that they will move in for the round
     def getMonsInTurnOrder(self):
@@ -102,7 +106,10 @@ class Stage:
     #do the jamming effect of the pokemon's move
     def doJam(self, contestant, currTurnOrder):
         if not (contestant.currMove == None or contestant.currMove.jamTarget == "no jam" or currTurnOrder == 0):
-            print(contestant.name + " tried to startle the other Pokemon!")
+            #flavor text
+            if contestant.currMove.jam < 0:
+                print(contestant.name + " tried to startle the other Pokemon!")
+                
             #startles only the pokemon in front
             if contestant.currMove.jamTarget == 'front':
                 #check if pokemon in front should be startled
@@ -132,7 +139,7 @@ class Stage:
                             self.contestants[i].changeScore(2 * contestant.currMove.jam)
                         else:
                             self.contestants[i].changeScore(contestant.currMove.jam)
-            #if jamming amount dependent is dependent on how successful the other contestants are
+            #if jamming amount is dependent on how successful the other contestants are
             elif contestant.currMove.jamTarget == 'successful':
                 for i in range(0, currTurnOrder):
                     #check if the pokemon should be startled
@@ -142,14 +149,46 @@ class Stage:
                     elif self.contestants[i].isVeryCalm == True:
                         print(self.contestants[i].name + " is completely oblivious to any attempts to startle.")
                     else:
+                        #jam for half of the pokemon's score this round, rounded down to the nearest 10. Minimum jam amount of 10
                         print(self.contestants[i].name + " was startled!")
                         jamAmount = max(10, int(self.contestants[i].tempScore / 20) * 10) * -1
                         if self.contestants[i].easyStartle == True:
                             self.contestants[i].changeScore(2 * jamAmount)
                         else:
                             self.contestants[i].changeScore(jamAmount)
-            #if jamming amount dependent is dependent on whether the other contestants are starting a combo
+            #if jamming effect is dependent on whether the other contestants are starting a combo
             elif contestant.currMove.jamTarget == 'high expectation':
+                if contestant.currMove.jam >= 0:
+                    print(contestant.name + " tried to lower the audience's expectations of the other Pokemon!")
+                for i in range(0, currTurnOrder):
+                    if contestant.currMove.jam < 0:
+                        #check if the pokemon should be startled
+                        if self.contestants[i].isCalm == True:
+                            print(self.contestants[i].name + " was not startled.")
+                            self.contestants[i].isCalm = False
+                        elif self.contestants[i].isVeryCalm == True:
+                            print(self.contestants[i].name + " is completely oblivious to any attempts to startle.")
+                        else:
+                            #badly startles pokemon that are starting a combo
+                            print(self.contestants[i].name + " was startled!")
+                            jamAmount = contestant.currMove.jam
+                            if self.contestants[i].isExpectingCombo == True:
+                                jamAmount -= 40
+                            if self.contestants[i].easyStartle == True:
+                                jamAmount *= 2
+                            self.contestants[i].changeScore(jamAmount)
+                    else:
+                        #make audience lose expectations of a combo
+                        if self.contestants[i].isExpectingCombo == True:
+                            print("The audience is no longer expecting a combo from " + self.contestants[i].name + ".")
+                        self.contestants[i].isExpectingCombo = False
+            #if the move doesn't cause other pokemon to lose hearts, but instead lowers their pumpedUp stat
+            elif contestant.currMove.jamTarget == 'energy only':
+                print(contestant.name + " tried to bring down the energy of the other Pokemon!")
+                for i in range(0, currTurnOrder):
+                    self.contestants[i].changePumpedUp(-1)
+            #if jamming amount is dependent on matching the move type of the other contestants
+            elif contestant.currMove.jamTarget == 'same type':
                 for i in range(0, currTurnOrder):
                     #check if the pokemon should be startled
                     if self.contestants[i].isCalm == True:
@@ -158,10 +197,11 @@ class Stage:
                     elif self.contestants[i].isVeryCalm == True:
                         print(self.contestants[i].name + " is completely oblivious to any attempts to startle.")
                     else:
+                        #badly startles pokemon that used a move of the same contest type
                         print(self.contestants[i].name + " was startled!")
                         jamAmount = contestant.currMove.jam
-                        if self.contestants[i].isExpectingCombo == True:
-                            jamAmount -= 40
+                        if self.contestants[i].currMove != None and self.contestants[i].currMove.category == contestant.currMove.category:
+                            jamAmount -= 30
                         if self.contestants[i].easyStartle == True:
                             jamAmount *= 2
                         self.contestants[i].changeScore(jamAmount)
@@ -189,7 +229,7 @@ class Stage:
         #print the total hearts each pokemon earned for this round and their priority score
         print("---")
         for contestant in self.contestants:
-            print(contestant.name + " earned " + str(int(contestant.tempScore/10)) + " heart(s) this round. Priority: " + str(contestant.priority))
+            print(contestant.name + " earned " + str(int(contestant.tempScore/10)) + " heart(s) this round. (Priority: " + str(contestant.priority) + ", Energy: " + str(contestant.pumpedUp) + ")")
         
         #update the turn order for the next round
         self.contestants.sort(reverse=True)
@@ -210,13 +250,18 @@ class Stage:
             
     #end the game
     def endGame(self):
-        print("\n=======\nTHE CONTEST HAS ENDED!")
+        print("\n=======\nTHE CONTEST HAS ENDED!\n=======\n")
+        
+        #make user press Enter before showing results, to build suspense
+        input("Press Enter to see the contest results...")
+        
         #calculate the total score for each contestant
         for contestant in self.contestants:
             contestant.calcTotalScore()
             
         #print resulting scores, in order of least to greatest
         self.contestants.sort(key=lambda contestant: contestant.totalScore)
+        print("-")
         print("RESULTS:")
         for contestant in self.contestants:
             print(contestant.name + " the " + contestant.species + " - Condition: " +str(int(contestant.condition)) + ", Appeal: " + str(int(contestant.currScore * 2)) + ", Total: " + str(int(contestant.totalScore)))

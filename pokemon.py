@@ -208,8 +208,7 @@ class Pokemon:
                 self.isVeryCalm = True
             #pumps up
             elif self.currMove.effectIndex == 5:
-                self.pumpedUp = min(self.pumpedUp + 1, 3)
-                print(self.name + " got even more pumped up than usual!")
+                self.changePumpedUp(1)
             #extra points for moves that work great if the user goes first
             elif self.currMove.effectIndex == 7 and currTurnOrder == 0:
                 print("The standout leader, " + self.name + ", really tried to show off its appeal!")
@@ -218,13 +217,16 @@ class Pokemon:
             elif self.currMove.effectIndex == 8 and currTurnOrder == 3:
                 print(self.name + " hadn't been standing out much, but really gave its all this time!")
                 self.changeScore(40)
-            #contestant earns 0,2,3,5 extra hearts moves that work better the later it is used in a turn (may need to adjust number of bonus hearts)
+            #contestant earns 0,1,3,5 extra hearts moves that work better the later it is used in a turn
             elif self.currMove.effectIndex == 9:
                 if currTurnOrder == 0:
                     pass
-                elif currTurnOrder >= 1 and currTurnOrder <= 2:
+                elif currTurnOrder == 1:
                     print(self.name + "'s " + self.currMove.name + " received extra points for its timing.")
-                    self.changeScore(currTurnOrder*10+10)
+                    self.changeScore(10)
+                elif currTurnOrder == 2:
+                    print(self.name + "'s " + self.currMove.name + " received extra points for its timing.")
+                    self.changeScore(30)
                 else:
                     print(self.name + "'s " + self.currMove.name + " received extra points for its excellent timing!")
                     self.changeScore(50)
@@ -232,7 +234,7 @@ class Pokemon:
             elif self.currMove.effectIndex == 10:
                 bonus = 2 * random.randint(0, 4) - 1
                 if bonus <= 0:
-                    print("The timing of " + self.name + "'s " + self.currMove.name + " didn't go over that well with the audience.")
+                    print("The timing of " + self.name + "'s " + self.currMove.name + " didn't go over that well with the audience...")
                 elif bonus >= 7:
                     print("The timing of " + self.name + "'s " + self.currMove.name + " went over great with the audience!")
                     self.changeScore(bonus * 10)
@@ -241,7 +243,7 @@ class Pokemon:
                     self.changeScore(bonus * 10)
             #easily startled
             elif self.currMove.effectIndex == 11:
-                print(self.name + " will startle more easily.")
+                print(self.name + " will startle more easily this round.")
                 self.easyStartle = True
             #self KO
             elif self.currMove.effectIndex == 13:
@@ -267,6 +269,17 @@ class Pokemon:
         else:
             print(self.name + " gained +" + str(int(scoreChange/10)) + " heart(s)!")
         self.tempScore += scoreChange
+        
+    #change pumpedUp value
+    def changePumpedUp(self, pumpedUpChange):
+        if pumpedUpChange < 0:
+            if self.pumpedUp > 0:
+                self.pumpedUp = max(0, self.pumpedUp - 1)
+                print(self.name + "'s energy was brought down!\n" + self.name + " lost -1 energy.")
+        else:
+            if self.pumpedUp <= 2:
+                self.pumpedUp = min(self.pumpedUp + 1, 3)
+                print(self.name + " got even more pumped up than usual!\n" + self.name + " gained +1 energy.")
     
     def getTempScore(self):
         return self.tempScore
@@ -311,14 +324,19 @@ class Pokemon:
         
     #implement bonus points, mega evolution, and flavor text when this pokemon performs a Spectacular Talent (called by stage.py when this pokemon maxes out the audience meter)
     def doSpectacular(self, category):
+        #make the element type of the spectacular talent the same as the pokemon. If the pokemon is dual-typed, choose randomly between the two types with the primary type weighted
+        spectacularType = self.types[0]
+        if len(self.types) > 1:
+            spectacularType = random.choices(population=self.types, weights=[0.75, 0.25], k=1)[0]
+            
         #give 5 bonus hearts (8 bonus hearts if the pokemon mega evolves this turn)
         if self.canMega == True and self.isMega == False:
             self.isMega = True
             self.species = "Mega " + self.species
             print(self.name + " mega evolved into " + self.species + "!")
-            print("This is it! Time for a Spectacular Talent! " + SpecMoves[category][random.choice(self.types)].upper() + "!!")
+            print("This is it! Time for a Spectacular Talent! " + SpecMoves[category][spectacularType].upper() + "!!")
             self.changeScore(80)
         else:
-            print("This is it! Time for a Spectacular Talent! " + SpecMoves[category][random.choice(self.types)].upper() + "!!")
+            print("This is it! Time for a Spectacular Talent! " + SpecMoves[category][spectacularType].upper() + "!!")
             self.changeScore(50)
         

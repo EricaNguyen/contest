@@ -38,7 +38,7 @@ effectDict = {
     21: ["Badly startles the last Pokemon to act before the user.", 10, -40, 'front'],
     22: ["Startles all of the Pokemon to act before the user.", 20, -20, 'all'],
     23: ["Badly startles all of the Pokemon to act before the user.", 10, -30, 'all'],
-    #effect depends on the state of other pokemon (definition done)
+    #effect depends on the state of other pokemon (definition done, move list done)
     24: ["Affected by how well the previous Pokemon's move went.", 30, 0, 'no jam'],
     25: ["Badly startles all Pokemon that successfully showed their appeal.", 20, -10, 'successful'],
     26: ["Badly startles Pokemon that the audience has high expectations of.", 20, -10, 'high expectation'],
@@ -46,14 +46,15 @@ effectDict = {
     28: ["Shows off the Pokemon's appeal about as well as all the moves before it this turn.", 10, 0, 'no jam'],
     29: ["Makes the audience quickly grow bored when an appeal move has little effect.", 40, 0, 'no jam'],
     30: ["Works well if it is the same type as the move used by the last Pokemon.", 20, 0, 'no jam'],
-    #might reorganize the id's of the moves after this line
-    31: ["Brings down the energy of any Pokemon that have already used a move this turn.", 30, 0, 'no jam'],
-    32: ["Makes audience expect little of other contestants.", 30, 0, 'no jam'],
+    #negatively affects other pokemon without causing them to lose hearts (definition done, game mechs done, move list done)
+    31: ["Brings down the energy of any Pokemon that have already used a move this turn.", 30, 0, 'energy only'],
+    32: ["Makes audience expect little of other contestants.", 30, 0, 'high expectation'],
+    #misc (definition done, move list done)
     33: ["Temporarily stops the crowd from growing excited.", 30, 0, 'no jam'],
     34: ["Shows off the Pokemon's appeal about as well as the move used just before it.", 10, 0, 'no jam'],
     35: ["Scrambles the order in which Pokemon will move on the next turn.", 30, 0, 'no jam'],
     
-    #other (temporarily use this for effects not implemented yet) (definition done)
+    #other (temporarily use this for effects not implemented yet)
     -1: ["Description not implemented yet.", 0, 0, 'no jam']
 }
 
@@ -66,7 +67,7 @@ class Move:
         self.effectIndex = effectIndex #0-35, see effectDict above
         self.appeal = effectDict[effectIndex][1]
         self.jam = effectDict[effectIndex][2]
-        self.jamTarget = effectDict[effectIndex][3] #options: no jam, front, all, same type, high expectation, successful
+        self.jamTarget = effectDict[effectIndex][3] #options: no jam, front, all, same type, high expectation, successful, energy only
         self.startsCombo = startsCombo #True if this move can be the start of a combo
         self.combosWith = combosWith #list the names of the moves that this move starts a combo with
         #additional effects of the move go here
@@ -756,17 +757,30 @@ moveList = {
     "Soak": Move("Soak", "cute", 26),
     "Uproar": Move("Uproar", "cute", 26),
     
-    #== Badly startles Pokemon that used a move of the same type (27) ==
-    #cool
+    #== Badly startles Pokemon that used a move of the same type (27) == DONE
+    #cool (done)
     "Cross Poison": Move("Cross Poison", "cool", 27),
+    "Double Hit": Move("Double Hit", "cool", 27),
+    "Double Kick": Move("Double Kick", "cool", 27),
+    "Extrasensory": Move("Extrasensory", "cool", 27),
+    "Sky Uppercut": Move("Sky Uppercut", "cool", 27),
+    "Twineedle": Move("Twineedle", "cool", 27),
+    "X-Scissor": Move("X-Scissor", "cool", 27),
     #tough (done)
     "Bonemerang": Move("Bonemerang", "tough", 27),
     "Dual Chop": Move("Dual Chop", "tough", 27),
     #beauty (done)
     "Acid Spray": Move("Acid Spray", "beauty", 27),
     "Thousand Arrows": Move("Thousand Arrows", "beauty", 27),
-    #clever
+    #clever (done)
     "Electrify": Move("Electrify", "clever", 27),
+    "Foresight": Move("Foresight", "clever", 27),
+    "Heal Order": Move("Heal Order", "clever", 27),
+    "Hex": Move("Hex", "clever", 27),
+    "Luster Purge": Move("Luster Purge", "clever", 27),
+    "Pursuit": Move("Pursuit", "clever", 27),
+    "Switcheroo": Move("Switcheroo", "clever", 27),
+    "Trick": Move("Trick", "clever", 27),
     #cute (done)
     "Entrainment": Move("Entrainment", "cute", 27, True, ["Circle Throw", "Seismic Toss", "Sky Drop", "Smack Down", "Storm Throw", "Vital Throw"]),
     "Nuzzle": Move("Nuzzle", "cute", 27, True, ["Hex", "Smelling Salts"]),
@@ -789,7 +803,7 @@ moveList = {
     #cute (done)
     "Draining Kiss": Move("Draining Kiss", "cute", 28),
     
-    #== Makes the audience quickly grow bored when an appeal move has little effect (29) ==
+    #== Makes the audience quickly grow bored when an appeal move has little effect (29) == DONE
     #cool (done)
     "False Swipe": Move("False Swipe", "cool", 29),
     "Hold Back": Move("Hold Back", "cool", 29),
@@ -804,7 +818,12 @@ moveList = {
     #clever (done)
     "Powder": Move("Powder", "clever", 29),
     "Roost": Move("Roost", "clever", 29),
-    #cute
+    #cute (done)
+    "Captivate": Move("Captivate", "cute", 29),
+    "Fake Tears": Move("Fake Tears", "cute", 29),
+    "Slack Off": Move("Slack Off", "cute", 29),
+    "Snore": Move("Snore", "cute", 29),
+    "Splash": Move("Splash", "cute", 29),
     "U-turn": Move("U-turn", "cute", 29),
     
     #== Works well if it is the same type as the move used by the last Pokemon (30) == DONE
@@ -825,7 +844,7 @@ moveList = {
     "Synchronoise": Move("Synchronoise", "clever", 30),
     #cute (N/A)
     
-    #== Brings down the energy of any Pokemon that have already used a move this turn (31) ==
+    #== Brings down the energy of any Pokemon that have already used a move this turn (31) == DONE
     #cool (N/A)
     #tough (done)
     "Constrict": Move("Constrict", "tough", 31),
@@ -842,10 +861,17 @@ moveList = {
     "Poison Tail": Move("Poison Tail", "clever", 31),
     "Toxic": Move("Toxic", "clever", 31, True, ["Hex", "Venom Drench", "Venoshock"]),
     "Venom Drench": Move("Venom Drench", "clever", 31),
-    #cute
+    #cute (done)
     "Bug Bite": Move("Bug Bite", "cute", 31),
     "Chatter": Move("Chatter", "cute", 31),
     "Confide": Move("Confide", "cute", 31),
+    "Fling": Move("Fling", "cute", 31),
+    "Mud-Slap": Move("Mud-Slap", "cute", 31),
+    "Play Rough": Move("Play Rough", "cute", 31),
+    "Pluck": Move("Pluck", "cute", 31),
+    "Simple Beam": Move("Simple Beam", "cute", 31),
+    "Swagger": Move("Swagger", "cute", 31),
+    "Tickle": Move("Tickle", "cute", 31),
     
     #== Makes audience expect little of other contestants (32) == DONE
     #cool (N/A)
@@ -893,18 +919,26 @@ moveList = {
     "Follow Me": Move("Follow Me", "cute", 33),
     "Infestation": Move("Infestation", "cute", 33),
     
-    #== Shows off the Pokemon's appeal about as well as the move used just before it (34) ==
+    #== Shows off the Pokemon's appeal about as well as the move used just before it (34) == DONE
     #cool (N/A)
     #tough (done)
     "Drain Punch": Move("Drain Punch", "tough", 34),
     "Horn Leech": Move("Horn Leech", "tough", 34),
     "Thief": Move("Thief", "tough", 34),
     #beauty (N/A)
-    #clever
+    #clever (done)
     "Foul Play": Move("Foul Play", "clever", 34),
     "Leech Life": Move("Leech Life", "clever", 34),
-    #cute
+    "Mirror Move": Move("Mirror Move", "clever", 34),
+    "Recycle": Move("Recycle", "clever", 34),
+    "Sketch": Move("Sketch", "clever", 34),
+    "Skill Swap": Move("Skill Swap", "clever", 34),
+    "Snatch": Move("Snatch", "clever", 34),
+    #cute (done)
+    "Copycat": Move("Copycat", "cute", 34),
     "Covet": Move("Covet", "cute", 34, True, ["Bestow", "Fling", "Present"]),
+    "Mimic": Move("Mimic", "cute", 34),
+    "Role Play": Move("Role Play", "cute", 34),
     
     #== Scrambles the order in which Pokemon will move on the next turn (35) == DONE
     #cool (N/A)

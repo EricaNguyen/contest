@@ -103,7 +103,7 @@ class Stage:
             self.excitementLevel = 0
             print("Audience excitement level: " + str(self.excitementLevel))
     
-    #do the jamming effect of the pokemon's move
+    #do the jamming effect of the pokemon's move (might move to pokemon.py later?)
     def doJam(self, contestant, currTurnOrder):
         if not (contestant.currMove == None or contestant.currMove.jamTarget == "no jam" or currTurnOrder == 0):
             #flavor text
@@ -229,7 +229,7 @@ class Stage:
         #print the total hearts each pokemon earned for this round and their priority score
         print("---")
         for contestant in self.contestants:
-            print(contestant.name + " earned " + str(int(contestant.tempScore/10)) + " heart(s) this round. (Priority: " + str(contestant.priority) + ", Energy: " + str(contestant.pumpedUp) + ")")
+            print(contestant.name + " the " + contestant.species + " earned " + str(int(contestant.tempScore/10)) + " heart(s) this round. (Priority: " + str(contestant.priority) + ", Energy: " + str(contestant.pumpedUp) + ")")
         
         #update the turn order for the next round
         self.contestants.sort(reverse=True)

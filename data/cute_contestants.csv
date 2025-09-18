@@ -1,0 +1,6 @@
+name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
+Picasso,Smeargle,255,255,255,255,275,Block,Baby-Doll Eyes,Attract,Yawn,FALSE,Normal,
+Bubbles,Azumarill,255,255,255,255,275,Belly Drum,Rollout,Defense Curl,Bubble Beam,FALSE,Water,Fairy
+Fluffy,Altaria,255,255,255,255,255,Cotton Guard,Return,Hone Claws,Draco Meteor,TRUE,Dragon,Fairy
+Purrple,Purrloin,255,255,255,255,275,Sand Attack,Fake Out,Charm,Encore,FALSE,Dark,
+Berry,Pachirisu,255,255,255,255,275,Follow Me,Nuzzle,Protect,Super Fang,FALSE,Electric,

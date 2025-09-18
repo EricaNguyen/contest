@@ -1,0 +1,6 @@
+name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
+Hana,Bellossom,255,255,255,275,255,Stun Spore,Absorb,Acid,Petal Blizzard,FALSE,Grass,
+Victoria,Gothitelle,255,255,255,275,255,Nasty Plot,Stored Power,Helping Hand,Fake Out,FALSE,Psychic,
+Teru,Banette,255,255,255,255,255,Shadow Sneak,Destiny Bond,Taunt,Curse,TRUE,Ghost,
+Shadower,Darkrai,255,255,255,275,255,Dark Void,Nightmare,Shadow Ball,Protect,FALSE,Dark,
+Maggie,Magnezone,255,255,255,275,255,Supersonic,Charge,Lock-On,Electric Terrain,FALSE,Electric,Steel

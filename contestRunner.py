@@ -7,73 +7,75 @@ import stage
 from stage import Stage
 import contestMove
 import random
+import csv
 
-"""
-#cool contest contestants
-moves1 = ["Thunder Wave", "Electro Ball", "Meteor Mash", "Agility"]
-mon1 = Pokemon("Chuchu", "Pikachu", 275, 255, 255, 255, 255, moves1, False, ["Electric"])
-moves2 = ["Swift", "Thunderbolt", "Psychic", "Quick Attack"]
-mon2 = Pokemon("Raili", "Raichu", 275, 255, 255, 255, 255, moves2, False, ["Electric", "Psychic"])
-moves3 = ["Detect", "Double Kick", "Focus Energy", "Blaze Kick"]
-mon3 = Pokemon("Bob", "Blaziken", 255, 255, 255, 255, 255, moves3, True, ["Fire", "Fighting"])
-moves4 = ["Hyper Beam", "Roar", "Crunch", "Stealth Rock"]
-mon4 = Pokemon("Cynthia", "Garchomp", 255, 255, 255, 255, 255, moves4, True, ["Ground", "Dragon"])
-"""
+#define the player's pokemon, with a preset for each contest category
+def initPlayerMon(category):  
+    player = None
+    
+    if category == "cool":
+        moves = ["Thunder Wave", "Electro Ball", "Meteor Mash", "Agility"]
+        player = Pokemon("Chuchu", "Pikachu", 275, 255, 255, 255, 255, moves, False, ["Electric"])
+    elif category == "tough":
+        moves = ["Power-Up Punch", "Iron Head", "Ancient Power", "Giga Impact"]
+        player = Pokemon("Stella", "Jirachi", 255, 275, 255, 255, 255, moves, False, ["Steel", "Psychic"])
+    elif category == "beauty":
+        moves = ["Morning Sun", "Acrobatics", "Silver Wind", "Sunny Day"]
+        player = Pokemon("Ageha", "Beautifly", 255, 255, 275, 255, 255, moves, False, ["Bug", "Flying"])
+    elif category == "clever":
+        moves = ["Calm Mind", "Stored Power", "Hypnosis", "Reflect"]
+        player = Pokemon("Lily", "Gardevoir", 255, 255, 255, 255, 255, moves, True, ["Psychic", "Fairy"])
+    else:
+        moves = ["Sing", "Baby-Doll Eyes", "Assist", "Disarming Voice"]
+        player = Pokemon("Pinky", "Skitty", 255, 255, 255, 255, 275, moves, False, ["Normal"])
+    
+    return player
 
-"""
-#tough contest contestants
-moves1 = ["Iron Head", "Giga Impact", "Ancient Power", "Power-Up Punch"]
-mon1 = Pokemon("Stella", "Jirachi", 255, 275, 255, 255, 255, moves1, False, ["Steel", "Psychic"])
-moves2 = ["Dig", "Muddy Water", "Aqua Tail", "Bide"]
-mon2 = Pokemon("Aquaman", "Swampert", 255, 255, 255, 255, 255, moves2, True, ["Water", "Ground"])
-moves3 = ["Endure", "Endeavor", "Iron Defense", "Sandstorm"]
-mon3 = Pokemon("Aaron", "Aron", 255, 275, 255, 255, 255, moves3, False, ["Steel", "Rock"])
-moves4 = ["Stockpile", "Spit Up", "Swallow", "Gunk Shot"]
-mon4 = Pokemon("Yamamoto", "Swalot", 255, 275, 255, 255, 255, moves4, False, ["Poison"])
-"""
+#create NPC opponents by reading data from a csv file, with presets for each category
+def initCPUMons(category): 
+    possibleRoster = []
+    
+    #pick which csv file to read from based on the contest category
+    filename = "data/" + category + "_contestants.csv"
+        
+    #read contestant data from csv file
+    with open(filename, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            #list of moves
+            tempMovepool = [row['move1'], row['move2'], row['move3'], row['move4']]
+            #list of types
+            tempType = [row['type1']]
+            if row['type2'] != "":
+                tempType.append(row['type2'])
+            #set bool for canMega
+            tempCanMega = False
+            if row['canMega'].upper() == "TRUE":
+                tempCanMega = True
+            
+            #make a new Pokemon object and append it to our list of possible contestants
+            possibleRoster.append( Pokemon(row['name'], row['species'], int(row['coolStat']), int(row['toughStat']), int(row['beautyStat']), int(row['cleverStat']), int(row['cuteStat']), tempMovepool, tempCanMega, tempType) )
+        
+    #pick 3 random mons from the possible roster
+    chosenContestants = random.sample(possibleRoster, 3)
+    
+    return chosenContestants
+        
 
-"""
-#beauty contest contestants
-moves1 = ["Morning Sun", "Acrobatics", "Silver Wind", "Sunny Day"]
-mon1 = Pokemon("Ageha", "Beautifly", 255, 255, 275, 255, 255, moves1, False, ["Bug", "Flying"])
-moves2 = ["Ice Beam", "Dragon Dance", "Aqua Tail", "Surf"]
-mon2 = Pokemon("Melody", "Milotic", 255, 255, 275, 255, 255, moves2, False, ["Water"])
-moves3 = ["Fire Spin", "Sunny Day", "Weather Ball", "Safeguard"]
-mon3 = Pokemon("Kitsune", "Ninetales", 255, 255, 275, 255, 255, moves3, False, ["Fire"])
-moves4 = ["Ice Shard", "Protect", "Blizzard", "Explosion"]
-mon4 = Pokemon("Snowball", "Glalie", 255, 255, 255, 255, 255, moves4, True, ["Ice"])
-"""
-
-
-#clever contest contestants
-moves1 = ["Calm Mind", "Stored Power", "Hypnosis", "Reflect"]
-mon1 = Pokemon("Lily", "Gardevoir", 255, 255, 255, 255, 255, moves1, True, ["Psychic", "Fairy"])
-moves2 = ["Stun Spore", "Absorb", "Acid", "Petal Blizzard"]
-mon2 = Pokemon("Hana", "Bellossom", 255, 255, 255, 275, 255, moves2, False, ["Grass"])
-moves3 = ["Dark Void", "Nightmare", "Shadow Ball", "Protect"]
-mon3 = Pokemon("Shadower", "Darkrai", 255, 255, 255, 275, 255, moves3, False, ["Dark"])
-moves4 = ["Shadow Sneak", "Destiny Bond", "Taunt", "Curse"]
-mon4 = Pokemon("Teru", "Banette", 255, 255, 255, 255, 255, moves4, True, ["Ghost"])
-
-
-"""
-#cute contest contestants
-moves1 = ["Attract", "Baby-Doll Eyes", "Sing", "Disarming Voice"]
-mon1 = Pokemon("Pinky", "Skitty", 255, 255, 255, 255, 275, moves1, False, ["Normal"])
-moves2 = ["Belly Drum", "Rollout", "Defense Curl", "Bubble Beam"]
-mon2 = Pokemon("Bubbles", "Azumarill", 255, 255, 255, 255, 275, moves2, False, ["Water", "Fairy"])
-moves3 = ["Cotton Guard", "Return", "Hone Claws", "Draco Meteor"]
-mon3 = Pokemon("Fluffy", "Altaria", 255, 255, 255, 255, 255, moves3, True, ["Dragon", "Fairy"])
-moves4 = ["Assist", "Fake Out", "Charm", "Encore"]
-mon4 = Pokemon("Purrple", "Purrloin", 255, 255, 255, 255, 275, moves4, False, ["Dark"])
-"""
-
+#initialize the contest category
+myCategory = "cute"
 
 #initialize the contestants
+mon1 = initPlayerMon(myCategory)
+CPUContestants = initCPUMons(myCategory)
+mon2 = CPUContestants[0]
+mon3 = CPUContestants[1]
+mon4 = CPUContestants[2]
+
 contestants = [mon1, mon2, mon3, mon4]
 
 #init the contest stage
-myStage = Stage("clever", contestants)
+myStage = Stage(myCategory, contestants)
 
 
 #RUN THE GAME
@@ -118,9 +120,9 @@ for i in range (0, 5):
     for j in range (0, 4):
         #print an asterisk in front of moves that complete a combo this turn
         seperatorMark = " - "
-        if mon1.isExpectingCombo == True and mon1.prevMove != None and moves1[j] in mon1.prevMove.combosWith:
+        if mon1.isExpectingCombo == True and mon1.prevMove != None and mon1.moves[j] in mon1.prevMove.combosWith:
             seperatorMark = " * "
-        print(str(j) + seperatorMark + str(contestMove.moveList[moves1[j]]))
+        print(str(j) + seperatorMark + str(contestMove.moveList[mon1.moves[j]]))
     choice = input()
     while choice.isdigit() == False or int(choice) > 3:
         print("Invalid choice, please type a number (0 - 3) to select the corresponding move and then press Enter.")
@@ -129,9 +131,9 @@ for i in range (0, 5):
         print("-")
         for j in range (0, 4):
             seperatorMark = " - "
-            if mon1.isExpectingCombo == True and mon1.prevMove != None and moves1[j] in mon1.prevMove.combosWith:
+            if mon1.isExpectingCombo == True and mon1.prevMove != None and mon1.moves[j] in mon1.prevMove.combosWith:
                 seperatorMark = " * "
-            print(str(j) + seperatorMark + str(contestMove.moveList[moves1[j]]))
+            print(str(j) + seperatorMark + str(contestMove.moveList[mon1.moves[j]]))
         choice = input()
         
     #each pokemon performs a move in the order decided for this round

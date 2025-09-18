@@ -163,20 +163,20 @@ class Pokemon:
     def doMove(self, moveIndex, currTurnOrder):
         #if the pokemon is knocked out, skip its turn
         if self.isKOd == True:
-            print(self.name + " is knocked out and can no longer move.")
+            print(self.name + " the " + self.species + " is knocked out and can no longer move.")
             self.isExpectingCombo = False
         #if the pokemon used a move the previous turn that requires it to recharge this turn, skip its turn
         elif self.prevMove is not None and self.prevMove.effectIndex == 12:
-            print("All " + self.name + " can do is watch the others.")
+            print("All " + self.name + " the " + self.species + " can do is watch the others.")
             self.isExpectingCombo = False
         #if the pokemon is nervous, skip its turn
         elif self.isNervous == True:
-            print(self.name + " was too nervous to move!")
+            print(self.name + " the " + self.species + " was too nervous to move!")
             self.isExpectingCombo = False
         #otherwise, carry out its move
         else:
             self.currMove = contestMove.moveList[self.moves[moveIndex]]
-            print(self.name + " tried to show its appeal with " + self.currMove.name + "!")
+            print(self.name + " the " + self.species + " tried to show its appeal with " + self.currMove.name + "!")
             
             #calculate initial base appeal. Bonuses based on the audience excitement level or the state of other contestants are handled in stage.py
             temp = self.currMove.appeal

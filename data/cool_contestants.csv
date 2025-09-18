@@ -1,0 +1,8 @@
+name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
+Zack,Zangoose,275,255,255,255,255,Slash,Leer,Swords Dance,Fling,FALSE,Normal,
+Bob,Blaziken,255,255,255,255,255,Detect,Double Kick,Focus Energy,Blaze Kick,TRUE,Fire,Fighting
+Naruto,Greninja,275,255,255,255,255,Water Shuriken,Aerial Ace,Dark Pulse,Mat Block,FALSE,Water,Dark
+Pinecone,Sceptile,255,255,255,255,255,Detect,Leaf Blade,Quick Attack,Outrage,TRUE,Grass,Dragon
+Raili,Raichu,275,255,255,255,255,Swift,Thunderbolt,Psychic,Quick Attack,FALSE,Electric,Psychic
+Cynthia,Garchomp,255,255,255,255,255,Hyper Beam,Roar,Stealth Rock,Dragon Claw,TRUE,Ground,Dragon
+Nana,Mightyena,275,255,255,255,255,Howl,Roar,Crunch,Ice Fang,FALSE,Dark,

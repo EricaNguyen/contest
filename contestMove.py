@@ -38,7 +38,7 @@ effectDict = {
     21: ["Badly startles the last Pokemon to act before the user.", 10, -40, 'front'],
     22: ["Startles all of the Pokemon to act before the user.", 20, -20, 'all'],
     23: ["Badly startles all of the Pokemon to act before the user.", 10, -30, 'all'],
-    #effect depends on the state of other pokemon (definition done, move list done)
+    #effect depends on the state of other pokemon (definition done, game mechs done, move list done)
     24: ["Affected by how well the previous Pokemon's move went.", 30, 0, 'no jam'],
     25: ["Badly startles all Pokemon that successfully showed their appeal.", 20, -10, 'successful'],
     26: ["Badly startles Pokemon that the audience has high expectations of.", 20, -10, 'high expectation'],
@@ -49,7 +49,7 @@ effectDict = {
     #negatively affects other pokemon without causing them to lose hearts (definition done, game mechs done, move list done)
     31: ["Brings down the energy of any Pokemon that have already used a move this turn.", 30, 0, 'energy only'],
     32: ["Makes audience expect little of other contestants.", 30, 0, 'high expectation'],
-    #misc (definition done, move list done)
+    #misc (definition done, game mechs done, move list done)
     33: ["Temporarily stops the crowd from growing excited.", 30, 0, 'no jam'],
     34: ["Shows off the Pokemon's appeal about as well as the move used just before it.", 10, 0, 'no jam'],
     35: ["Scrambles the order in which Pokemon will move on the next turn.", 30, 0, 'no jam'],

@@ -17,17 +17,17 @@ def initPlayerMon(category):
         moves = ["Thunder Wave", "Electro Ball", "Meteor Mash", "Agility"]
         player = Pokemon("Chuchu", "Pikachu", 275, 255, 255, 255, 255, moves, False, ["Electric"])
     elif category == "tough":
-        moves = ["Power-Up Punch", "Iron Head", "Ancient Power", "Giga Impact"]
-        player = Pokemon("Stella", "Jirachi", 255, 275, 255, 255, 255, moves, False, ["Steel", "Psychic"])
+        moves = ["Focus Punch", "Flying Press", "Wild Charge", "Dig"]
+        player = Pokemon("Pika", "Pikachu", 255, 275, 255, 255, 255, moves, False, ["Electric"])
     elif category == "beauty":
-        moves = ["Morning Sun", "Acrobatics", "Silver Wind", "Sunny Day"]
-        player = Pokemon("Ageha", "Beautifly", 255, 255, 275, 255, 255, moves, False, ["Bug", "Flying"])
+        moves = ["Icicle Crash", "Round", "Discharge", "Flash"]
+        player = Pokemon("Chuchu", "Pikachu", 255, 255, 275, 255, 255, moves, False, ["Electric"])
     elif category == "clever":
-        moves = ["Calm Mind", "Stored Power", "Hypnosis", "Reflect"]
-        player = Pokemon("Lily", "Gardevoir", 255, 255, 255, 255, 255, moves, True, ["Psychic", "Fairy"])
+        moves = ["Electric Terrain", "Knock Off", "Feint", "Magnet Rise"]
+        player = Pokemon("Pika", "Pikachu", 255, 255, 255, 275, 255, moves, False, ["Electric"])
     else:
-        moves = ["Sing", "Baby-Doll Eyes", "Assist", "Disarming Voice"]
-        player = Pokemon("Pinky", "Skitty", 255, 255, 255, 255, 275, moves, False, ["Normal"])
+        moves = ["Nuzzle", "Play Nice", "Draining Kiss", "Attract"]
+        player = Pokemon("Chuchu", "Pikachu", 255, 255, 255, 255, 275, moves, False, ["Electric"])
     
     return player
 
@@ -63,7 +63,7 @@ def initCPUMons(category):
         
 
 #initialize the contest category
-myCategory = "cute"
+myCategory = "cool"
 
 #initialize the contestants
 mon1 = initPlayerMon(myCategory)
@@ -94,7 +94,7 @@ for i in range (0, 5):
         
     #each pokemon performs a move in the order decided for this round
     for i in range(0, 4):
-        myStage.getMonsInTurnOrder()[i].doMove(random.randint(0,3), i) #perform move
+        myStage.getMonsInTurnOrder()[i].doMove(random.randint(0,3), i, myStage.getMonsInTurnOrder()) #perform move
         myStage.updateExcitementLevel(myStage.getMonsInTurnOrder()[i], i) #update excitement level
         myStage.doJam(myStage.getMonsInTurnOrder()[i], i) #jam other pokemon
         myStage.makeNervous(myStage.getMonsInTurnOrder()[i], i) #make other pokemon nervous
@@ -139,9 +139,9 @@ for i in range (0, 5):
     #each pokemon performs a move in the order decided for this round
     for i in range(0, 4):
         if myStage.getMonsInTurnOrder()[i] is mon1:
-            myStage.getMonsInTurnOrder()[i].doMove(int(choice), i) #player performs a move
+            myStage.getMonsInTurnOrder()[i].doMove(int(choice), i, myStage.getMonsInTurnOrder()) #player performs a move
         else:
-            myStage.getMonsInTurnOrder()[i].doMove(random.randint(0,3), i) #NPC perform move
+            myStage.getMonsInTurnOrder()[i].doMove(random.randint(0,3), i, myStage.getMonsInTurnOrder()) #NPC perform move
         myStage.updateExcitementLevel(myStage.getMonsInTurnOrder()[i], i) #update excitement level
         myStage.doJam(myStage.getMonsInTurnOrder()[i], i) #jam other pokemon
         myStage.makeNervous(myStage.getMonsInTurnOrder()[i], i) #make other pokemon nervous

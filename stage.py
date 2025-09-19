@@ -71,9 +71,15 @@ class Stage:
                 contestant.changeScore(-10)
             #if the move's category is not primary or secondary to this contest's category, lower excitement and subtract a heart
             elif contestant.currMove.effectIndex != 17 and contestant.currMove.category is not self.category and contestant.currMove.category not in contestMove.categorySecondaryType[self.category]:
-                print("But "+ contestant.name + "'s show of " + categoryNouns[contestant.currMove.category] + " didn't go over very well with this audience.")
-                self.excitementLevel = max(0, self.excitementLevel - 1)
-                contestant.changeScore(-10)
+                #lower excitement by 2 instead of 1 if the move description is 'Makes the audience quickly grow bored when an appeal move has little effect' (need further research to see if this effect is correct)
+                if contestant.currMove.effectIndex == 29:
+                    print("But "+ contestant.name + "'s show of " + categoryNouns[contestant.currMove.category] + " went very poorly with this audience...")
+                    self.excitementLevel = max(0, self.excitementLevel - 2)
+                    contestant.changeScore(-10)
+                else:
+                    print("But "+ contestant.name + "'s show of " + categoryNouns[contestant.currMove.category] + " didn't go over very well with this audience.")
+                    self.excitementLevel = max(0, self.excitementLevel - 1)
+                    contestant.changeScore(-10)
             #if the excitement meter isnt frozen 
             elif(self.isExcitementStopped == False):
                 #the move matched the contest category and meets the requirements for "excites the audience a lot", raise excitement by 2 instead of 1
@@ -102,6 +108,7 @@ class Stage:
             #reset the excitement level
             self.excitementLevel = 0
             print("Audience excitement level: " + str(self.excitementLevel))
+    
     
     #do the jamming effect of the pokemon's move (might move to pokemon.py later?)
     def doJam(self, contestant, currTurnOrder):
@@ -250,7 +257,7 @@ class Stage:
             
     #end the game
     def endGame(self):
-        print("\n=======\nTHE CONTEST HAS ENDED!\n=======\n")
+        print("\n=======\nTHE CONTEST HAS ENDED!\n=======")
         
         #make user press Enter before showing results, to build suspense
         input("Press Enter to see the contest results...")

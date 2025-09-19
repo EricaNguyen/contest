@@ -2,6 +2,8 @@ name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3
 Kitsune,Ninetales,255,255,275,255,255,Fire Spin,Sunny Day,Weather Ball,Safeguard,FALSE,Fire,
 Melody,Milotic,255,255,275,255,255,Ice Beam,Dragon Dance,Aqua Tail,Surf,FALSE,Water,
 Snowball,Glalie,255,255,255,255,255,Ice Shard,Protect,Blizzard,Explosion,TRUE,Ice,
-Luna,Dustox,255,255,275,255,255,Moonlight,Acrobatics,Quiver Dance,Sunny Day,FALSE,Bug,Poison
+Ageha,Beautifly,255,255,275,255,255,Morning Sun,Acrobatics,Silver Wind,Sunny Day,FALSE,Bug,Flying
 Diantha,Diancie,255,255,255,255,255,Diamond Storm,Moonblast,Dazzling Gleam,Power Gem,TRUE,Rock,Fairy
-Selene,Cresselia,255,255,275,255,255,Moonlight,Moonblast,Lunar Dance,Aurora Beam,FALSE,Psychic,
+Selene,Cresselia,255,255,275,255,255,Moonlight,Moonblast,Lunar Dance,Psybeam,FALSE,Psychic,
+Astro,Jirachi,255,255,275,255,255,Cosmic Power,Doom Desire,Charge Beam,Round,FALSE,Steel,Psychic
+Sakura,Cherrim,255,255,275,255,255,Petal Blizzard,Petal Dance,Flower Shield,Growth,FALSE,Grass,

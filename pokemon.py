@@ -160,7 +160,7 @@ class Pokemon:
                 return self.tempScore > other.tempScore
         
     #perform a move
-    def doMove(self, moveIndex, currTurnOrder):
+    def doMove(self, moveIndex, currTurnOrder, contestantsList):
         #if the pokemon is knocked out, skip its turn
         if self.isKOd == True:
             print(self.name + " the " + self.species + " is knocked out and can no longer move.")
@@ -178,20 +178,91 @@ class Pokemon:
             self.currMove = contestMove.moveList[self.moves[moveIndex]]
             print(self.name + " the " + self.species + " tried to show its appeal with " + self.currMove.name + "!")
             
-            #calculate initial base appeal. Bonuses based on the audience excitement level or the state of other contestants are handled in stage.py
+            
+            # === BASE APPEAL POINTS ===
+            #calculate initial base appeal. Bonuses based on the audience excitement level are handled in stage.py
             temp = self.currMove.appeal
-            #bonus hearts for being mega evolved and/or pumped up
-            if self.isMega == True:
-                temp += 10
+            flavorText = ""
+            #extra points for moves that work great if the user goes first
+            if self.currMove.effectIndex == 7 and currTurnOrder == 0:
+                flavorText = "The standout leader, " + self.name + ", really tried to show off its appeal!"
+                temp += 40
+            #extra points for moves that work great if the user goes last
+            elif self.currMove.effectIndex == 8 and currTurnOrder == 3:
+                flavorText = self.name + " hadn't been standing out much, but really gave its all this time!"
+                temp += 40
+            #contestant earns 0,1,3,5 extra hearts moves that work better the later it is used in a turn
+            elif self.currMove.effectIndex == 9:
+                if currTurnOrder == 0:
+                    pass
+                elif currTurnOrder == 1:
+                    flavorText = self.name + "'s " + self.currMove.name + " received extra points for its timing."
+                    temp += 10
+                elif currTurnOrder == 2:
+                    flavorText = self.name + "'s " + self.currMove.name + " received extra points for its timing."
+                    temp += 30
+                else:
+                    flavorText = self.name + "'s " + self.currMove.name + " showed off its appeal fantastically well!"
+                    temp += 50
+            #extra random hearts for moves that "vary depending on when it is used" (yes, it's a misleading description from the OG games...)
+            elif self.currMove.effectIndex == 10:
+                bonus = 2 * random.randint(0, 4) - 1
+                if bonus <= 0:
+                    flavorText = "The timing of " + self.name + "'s " + self.currMove.name + " didn't go over that well with the audience..."
+                elif bonus >= 7:
+                    flavorText = "The timing of " + self.name + "'s " + self.currMove.name + " went over great with the audience!"
+                    temp += bonus * 10
+                else:
+                    flavorText = "The timing of " + self.name + "'s " + self.currMove.name + " went over fairly well with the audience."
+                    temp += bonus * 10
+            #if the move is 'Affected by how well the previous Pokemon's move went', give 0 hearts if the pokemon in front has more than 3 hearts, 6 if less, and 3 otherwise
+            elif self.currMove.effectIndex == 24:
+                if currTurnOrder == 0 or contestantsList[currTurnOrder-1].tempScore == 30:
+                    pass
+                elif contestantsList[currTurnOrder-1].tempScore > 30:
+                    flavorText = "But " + self.name + " failed to stand out compared to the Pokemon that went before it..."
+                    temp = 0
+                else:
+                    flavorText = "It totally outshone the last Pokemon! What appeal!"
+                    temp = 60
+            #if 'Shows off the Pokemon's appeal about as well as all the moves before it this turn', add hearts equal to sum of all previous contestants divided by 2, rounded down
+            elif self.currMove.effectIndex == 28:
+                if currTurnOrder > 0:
+                    tempSum = 0
+                    for i in range(0, currTurnOrder):
+                        tempSum += contestantsList[i].tempScore
+                    tempSum = int(tempSum/10)
+                    tempSum = int(tempSum/2)
+                    tempSum = max(0, tempSum)
+                    tempSum *= 10
+                    temp += tempSum
+            #if 'Works well if it is the same type as the move used by the last Pokemon', add 4 bonus hearts
+            elif self.currMove.effectIndex == 30:
+                if currTurnOrder > 0 and contestantsList[currTurnOrder-1].currMove != None and contestantsList[currTurnOrder-1].currMove.category == self.currMove.category:
+                    temp += 40
+                    flavorText = "It was a huge hit with the audience because it was the same type as the move used by the last Pokemon!"
+            #if 'Shows off the Pokemon's appeal about as well as the move used just before it', add number of hearts equal to the previous pokemon
+            elif self.currMove.effectIndex == 34:
+                if currTurnOrder > 0:
+                    temp += max(0, contestantsList[currTurnOrder-1].tempScore)
+                    flavorText = self.name + " did about as well as the Pokemon that went before it."
+            
             #bonus hearts for being pumped up, 3x bonus if the move works well when pumped up
             if self.currMove.effectIndex == 6:
                 temp += self.pumpedUp*30
             else:
                 temp += self.pumpedUp*10
+                
             #add initial appeal score to this round's score
             self.changeScore(temp)
             
-            #additional effects that apply only to the user. Effects that affect other pokemon or rely on data from other pokemon are handled in stage.py
+            #print flavor text
+            if flavorText != "":
+                print(flavorText)
+            
+            
+            # === SECONDARY EFFECTS ===
+            #additional effects that apply only to the user. Effects that affect other pokemon are handled in stage.py's method doJam
             #sets priority
             if self.currMove.effectIndex == 1:
                 print(self.name + " will move first in the next round.")
@@ -209,46 +280,20 @@ class Pokemon:
             #pumps up
             elif self.currMove.effectIndex == 5:
                 self.changePumpedUp(1)
-            #extra points for moves that work great if the user goes first
-            elif self.currMove.effectIndex == 7 and currTurnOrder == 0:
-                print("The standout leader, " + self.name + ", really tried to show off its appeal!")
-                self.changeScore(40)
-            #extra points for moves that work great if the user goes last
-            elif self.currMove.effectIndex == 8 and currTurnOrder == 3:
-                print(self.name + " hadn't been standing out much, but really gave its all this time!")
-                self.changeScore(40)
-            #contestant earns 0,1,3,5 extra hearts moves that work better the later it is used in a turn
-            elif self.currMove.effectIndex == 9:
-                if currTurnOrder == 0:
-                    pass
-                elif currTurnOrder == 1:
-                    print(self.name + "'s " + self.currMove.name + " received extra points for its timing.")
-                    self.changeScore(10)
-                elif currTurnOrder == 2:
-                    print(self.name + "'s " + self.currMove.name + " received extra points for its timing.")
-                    self.changeScore(30)
-                else:
-                    print(self.name + "'s " + self.currMove.name + " received extra points for its excellent timing!")
-                    self.changeScore(50)
-            #extra random hearts for moves that "vary depending on when it is used" (yes, it's a misleading description from the OG games...)
-            elif self.currMove.effectIndex == 10:
-                bonus = 2 * random.randint(0, 4) - 1
-                if bonus <= 0:
-                    print("The timing of " + self.name + "'s " + self.currMove.name + " didn't go over that well with the audience...")
-                elif bonus >= 7:
-                    print("The timing of " + self.name + "'s " + self.currMove.name + " went over great with the audience!")
-                    self.changeScore(bonus * 10)
-                else:
-                    print("The timing of " + self.name + "'s " + self.currMove.name + " went over fairly well with the audience.")
-                    self.changeScore(bonus * 10)
             #easily startled
             elif self.currMove.effectIndex == 11:
                 print(self.name + " will startle more easily this round.")
                 self.easyStartle = True
             #self KO
             elif self.currMove.effectIndex == 13:
+                print(self.name + " will not be able to make any more appeals for the rest of the contest.")
                 self.isKOd = True
-                
+            #scrambles turn order
+            elif self.currMove.effectIndex == 35:
+                print(self.name + " scrambled the order of appeals for the next round!")
+                for i in range(0, 4):
+                    contestantsList[i].priority = random.random()
+            
             #if this move completes a combo, earn 3 extra hearts
             if self.isExpectingCombo == True and self.prevMove is not None and self.prevMove.startsCombo == True and self.currMove.name in self.prevMove.combosWith:
                 print(self.name + "'s move combination went over well with the audience!")

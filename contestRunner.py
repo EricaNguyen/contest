@@ -60,10 +60,12 @@ def initCPUMons(category):
     chosenContestants = random.sample(possibleRoster, 3)
     
     return chosenContestants
-        
+
 
 #initialize the contest category
 myCategory = "cool"
+
+contestMove.readMoveData("data/ORAS_movelist.csv")
 
 #initialize the contestants
 mon1 = initPlayerMon(myCategory)
@@ -94,10 +96,10 @@ for i in range (0, 5):
         
     #each pokemon performs a move in the order decided for this round
     for i in range(0, 4):
-        myStage.getMonsInTurnOrder()[i].doMove(random.randint(0,3), i, myStage.getMonsInTurnOrder()) #perform move
+        myStage.getMonsInTurnOrder()[i].doAppeal(random.randint(0,3), i, myStage.getMonsInTurnOrder()) #perform move
+        myStage.getMonsInTurnOrder()[i].doJam(i, myStage.getMonsInTurnOrder()) #jam other pokemon
+        myStage.getMonsInTurnOrder()[i].makeOthersNervous(i, myStage.getMonsInTurnOrder()) #make other pokemon nervous
         myStage.updateExcitementLevel(myStage.getMonsInTurnOrder()[i], i) #update excitement level
-        myStage.doJam(myStage.getMonsInTurnOrder()[i], i) #jam other pokemon
-        myStage.makeNervous(myStage.getMonsInTurnOrder()[i], i) #make other pokemon nervous
         print()
     
     #move on to the next round
@@ -139,12 +141,13 @@ for i in range (0, 5):
     #each pokemon performs a move in the order decided for this round
     for i in range(0, 4):
         if myStage.getMonsInTurnOrder()[i] is mon1:
-            myStage.getMonsInTurnOrder()[i].doMove(int(choice), i, myStage.getMonsInTurnOrder()) #player performs a move
+            myStage.getMonsInTurnOrder()[i].doAppeal(int(choice), i, myStage.getMonsInTurnOrder()) #player performs a move
         else:
-            myStage.getMonsInTurnOrder()[i].doMove(random.randint(0,3), i, myStage.getMonsInTurnOrder()) #NPC perform move
-        myStage.updateExcitementLevel(myStage.getMonsInTurnOrder()[i], i) #update excitement level
-        myStage.doJam(myStage.getMonsInTurnOrder()[i], i) #jam other pokemon
-        myStage.makeNervous(myStage.getMonsInTurnOrder()[i], i) #make other pokemon nervous
+            myStage.getMonsInTurnOrder()[i].doAppeal(random.randint(0,3), i, myStage.getMonsInTurnOrder()) #NPC performs a random move
+        myStage.getMonsInTurnOrder()[i].doJam(i, myStage.getMonsInTurnOrder()) #jam other pokemon
+        myStage.getMonsInTurnOrder()[i].makeOthersNervous(i, myStage.getMonsInTurnOrder()) #make other pokemon nervous
+        myStage.updateExcitementLevel(myStage.getMonsInTurnOrder()[i], i) #update audience excitement level
+        
         print()
     
     #move on to the next round

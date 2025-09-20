@@ -70,25 +70,26 @@ class Stage:
                 print("The crowd was disappointed to see " + contestant.name + " repeat the same move...")
                 contestant.changeScore(-10)
             #if the move's category is not primary or secondary to this contest's category, lower excitement and subtract a heart
-            elif contestant.currMove.effectIndex != 17 and contestant.currMove.category is not self.category and contestant.currMove.category not in contestMove.categorySecondaryType[self.category]:
+            elif contestant.currMove.effectIndex != 17 and contestant.currMove.category != self.category and contestant.currMove.category not in contestMove.categorySecondaryType[self.category]:
                 #lower excitement by 2 instead of 1 if the move description is 'Makes the audience quickly grow bored when an appeal move has little effect' (need further research to see if this effect is correct)
                 if contestant.currMove.effectIndex == 29:
                     print("But "+ contestant.name + "'s show of " + categoryNouns[contestant.currMove.category] + " went very poorly with this audience...")
                     self.excitementLevel = max(0, self.excitementLevel - 2)
                     contestant.changeScore(-10)
                 else:
+                    #print("contestant.currMove.category = " + contestant.currMove.category + ", stage category = " + self.category)
                     print("But "+ contestant.name + "'s show of " + categoryNouns[contestant.currMove.category] + " didn't go over very well with this audience.")
                     self.excitementLevel = max(0, self.excitementLevel - 1)
                     contestant.changeScore(-10)
             #if the excitement meter isnt frozen 
             elif(self.isExcitementStopped == False):
                 #the move matched the contest category and meets the requirements for "excites the audience a lot", raise excitement by 2 instead of 1
-                if (contestant.currMove.category is self.category and (contestant.currMove.effectIndex == 15 and currTurnOrder == 0 or contestant.currMove.effectIndex == 16 and currTurnOrder == 3)):
+                if (contestant.currMove.category == self.category and (contestant.currMove.effectIndex == 15 and currTurnOrder == 0 or contestant.currMove.effectIndex == 16 and currTurnOrder == 3)):
                     print(contestant.name + "'s move really, really excited the audience!")
                     self.excitementLevel = min(self.excitementLevel + 2, 5)
                     contestant.changeScore(20)
                 #if the move was not a repeat and the move category matched the contest category or always raises excitement regardless of category, raise excitement and add a heart
-                elif (contestant.currMove.category is self.category or contestant.currMove.effectIndex == 17):
+                elif (contestant.currMove.category == self.category or contestant.currMove.effectIndex == 17):
                     print(contestant.name + "'s " + categoryNouns[contestant.currMove.category] + " really excited the audience!")
                     self.excitementLevel += 1
                     contestant.changeScore(10)
@@ -110,130 +111,9 @@ class Stage:
             print("Audience excitement level: " + str(self.excitementLevel))
     
     
-    #do the jamming effect of the pokemon's move (might move to pokemon.py later?)
-    def doJam(self, contestant, currTurnOrder):
-        if not (contestant.currMove == None or contestant.currMove.jamTarget == "no jam" or currTurnOrder == 0):
-            #flavor text
-            if contestant.currMove.jam < 0:
-                print(contestant.name + " tried to startle the other Pokemon!")
-                
-            #startles only the pokemon in front
-            if contestant.currMove.jamTarget == 'front':
-                #check if pokemon in front should be startled
-                if self.contestants[currTurnOrder-1].isCalm == True:
-                    print(self.contestants[currTurnOrder-1].name + " was not startled.")
-                    self.contestants[currTurnOrder-1].isCalm = False
-                elif self.contestants[currTurnOrder-1].isVeryCalm == True:
-                    print(self.contestants[currTurnOrder-1].name + " is completely oblivious to any attempts to startle.")
-                else:
-                    print(self.contestants[currTurnOrder-1].name + " was startled!")
-                    if self.contestants[currTurnOrder-1].easyStartle == True:
-                        self.contestants[currTurnOrder-1].changeScore(2 * contestant.currMove.jam)
-                    else:
-                        self.contestants[currTurnOrder-1].changeScore(contestant.currMove.jam)
-            #startles all pokemon in front
-            elif contestant.currMove.jamTarget == 'all':
-                for i in range(0, currTurnOrder):
-                    #check if the pokemon should be startled
-                    if self.contestants[i].isCalm == True:
-                        print(self.contestants[i].name + " was not startled.")
-                        self.contestants[i].isCalm = False
-                    elif self.contestants[i].isVeryCalm == True:
-                        print(self.contestants[i].name + " is completely oblivious to any attempts to startle.")
-                    else:
-                        print(self.contestants[i].name + " was startled!")
-                        if self.contestants[i].easyStartle == True:
-                            self.contestants[i].changeScore(2 * contestant.currMove.jam)
-                        else:
-                            self.contestants[i].changeScore(contestant.currMove.jam)
-            #if jamming amount is dependent on how successful the other contestants are
-            elif contestant.currMove.jamTarget == 'successful':
-                for i in range(0, currTurnOrder):
-                    #check if the pokemon should be startled
-                    if self.contestants[i].isCalm == True:
-                        print(self.contestants[i].name + " was not startled.")
-                        self.contestants[i].isCalm = False
-                    elif self.contestants[i].isVeryCalm == True:
-                        print(self.contestants[i].name + " is completely oblivious to any attempts to startle.")
-                    else:
-                        #jam for half of the pokemon's score this round, rounded down to the nearest 10. Minimum jam amount of 10
-                        print(self.contestants[i].name + " was startled!")
-                        jamAmount = max(10, int(self.contestants[i].tempScore / 20) * 10) * -1
-                        if self.contestants[i].easyStartle == True:
-                            self.contestants[i].changeScore(2 * jamAmount)
-                        else:
-                            self.contestants[i].changeScore(jamAmount)
-            #if jamming effect is dependent on whether the other contestants are starting a combo
-            elif contestant.currMove.jamTarget == 'high expectation':
-                if contestant.currMove.jam >= 0:
-                    print(contestant.name + " tried to lower the audience's expectations of the other Pokemon!")
-                for i in range(0, currTurnOrder):
-                    if contestant.currMove.jam < 0:
-                        #check if the pokemon should be startled
-                        if self.contestants[i].isCalm == True:
-                            print(self.contestants[i].name + " was not startled.")
-                            self.contestants[i].isCalm = False
-                        elif self.contestants[i].isVeryCalm == True:
-                            print(self.contestants[i].name + " is completely oblivious to any attempts to startle.")
-                        else:
-                            #badly startles pokemon that are starting a combo
-                            print(self.contestants[i].name + " was startled!")
-                            jamAmount = contestant.currMove.jam
-                            if self.contestants[i].isExpectingCombo == True:
-                                jamAmount -= 40
-                            if self.contestants[i].easyStartle == True:
-                                jamAmount *= 2
-                            self.contestants[i].changeScore(jamAmount)
-                    else:
-                        #make audience lose expectations of a combo
-                        if self.contestants[i].isExpectingCombo == True:
-                            print("The audience is no longer expecting a combo from " + self.contestants[i].name + ".")
-                        self.contestants[i].isExpectingCombo = False
-            #if the move doesn't cause other pokemon to lose hearts, but instead lowers their pumpedUp stat
-            elif contestant.currMove.jamTarget == 'energy only':
-                print(contestant.name + " tried to bring down the energy of the other Pokemon!")
-                for i in range(0, currTurnOrder):
-                    self.contestants[i].changePumpedUp(-1)
-            #if jamming amount is dependent on matching the move type of the other contestants
-            elif contestant.currMove.jamTarget == 'same type':
-                for i in range(0, currTurnOrder):
-                    #check if the pokemon should be startled
-                    if self.contestants[i].isCalm == True:
-                        print(self.contestants[i].name + " was not startled.")
-                        self.contestants[i].isCalm = False
-                    elif self.contestants[i].isVeryCalm == True:
-                        print(self.contestants[i].name + " is completely oblivious to any attempts to startle.")
-                    else:
-                        #badly startles pokemon that used a move of the same contest type
-                        print(self.contestants[i].name + " was startled!")
-                        jamAmount = contestant.currMove.jam
-                        if self.contestants[i].currMove != None and self.contestants[i].currMove.category == contestant.currMove.category:
-                            jamAmount -= 30
-                        if self.contestants[i].easyStartle == True:
-                            jamAmount *= 2
-                        self.contestants[i].changeScore(jamAmount)
-            #else
-            else:
-                print("Need to write implementation for jam target: " + contestant.currMove.jamTarget)
-                
-    #chance of making later pokemon nervous, if applicable for the given pokemon's current move
-    def makeNervous(self, contestant, currTurnOrder):
-        if not(contestant.currMove == None or contestant.currMove.effectIndex != 14 or currTurnOrder == 3):
-            print(contestant.name + " tried to unnerve the Pokemon waiting for their turns!")
-            success = False
-            for i in range(currTurnOrder+1, 4):
-                #chance of making pokemon nervous
-                if random.random() < 0.5 ** (1 + self.contestants[i].pumpedUp) and self.contestants[i].isNervous == False:
-                    self.contestants[i].isNervous = True
-                    print(self.contestants[i].name + " became nervous!")
-                    success = True
-            if success == False:
-                print("But it failed!")
-                    
-    
     #update the state of the game to the next round
     def nextRound(self):
-        #print the total hearts each pokemon earned for this round and their priority score
+        #print the total hearts each pokemon earned for this round, their priority score, and their pumpedUp value
         print("---")
         for contestant in self.contestants:
             print(contestant.name + " the " + contestant.species + " earned " + str(int(contestant.tempScore/10)) + " heart(s) this round. (Priority: " + str(contestant.priority) + ", Energy: " + str(contestant.pumpedUp) + ")")
@@ -248,7 +128,7 @@ class Stage:
         #update the round counter
         self.currRound += 1
         
-        #resume excitement meter changes for the next round
+        #resume audience excitement meter changes for the next round
         self.isExcitementStopped = False
         
         #if 5 rounds have already been completed, end the game

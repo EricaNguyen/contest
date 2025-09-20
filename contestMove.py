@@ -1,3 +1,4 @@
+import csv
 #this file contains data on all moves
 
 #given an id nuber, this dictionary keeps track of a move's effect
@@ -77,7 +78,7 @@ class Move:
 
 
 #this dictionary keeps track of the data for all moves
-#cool combo starters done
+"""
 moveList = {
     #== Quite an appealing move (0) == DONE
     #cool (done)
@@ -954,7 +955,8 @@ moveList = {
     #placeholder move
     "Struggle": Move("Struggle", "tough", 0)
 }
-
+"""
+moveList = {}
 
 #this dictionary keeps track of which categories are secondary to a given category
 categorySecondaryType = {
@@ -964,3 +966,15 @@ categorySecondaryType = {
     "clever": ["cute", "tough"],
     "cute": ["beauty", "clever"]
 }
+
+#read csv file containing data for all moves (currently bugged with category)
+def readMoveData(filename):
+    with open(filename, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            #name, category, effectIndex, startsCombo, combosWith
+            if row['startsCombo'].strip() == "FALSE":
+                moveList[row['name']] = Move(row['name'], row['category'], int(row['effectIndex']))
+            else:
+                mylist = row['combosWith'].split('|')
+                moveList[row['name']] = Move(row['name'], row['category'], int(row['effectIndex']), True, mylist)

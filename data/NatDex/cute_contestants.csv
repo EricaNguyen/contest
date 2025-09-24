@@ -1,0 +1,12 @@
+name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
+Ichika,Alcremie,255,255,255,255,275,Baby-Doll Eyes,Decorate,Sweet Scent,Alluring Voice,FALSE,Fairy,
+Rimi,Ribombee,255,255,255,255,275,Pollen Puff,Struggle Bug,U-turn,Moonblast,FALSE,Bug,Fairy
+Earl,Polteageist,255,255,255,255,275,Teatime,Aromatic Mist,Metronome,Substitute,FALSE,Ghost,
+Chewy,Skwovet,255,255,255,255,275,Stuff Cheeks,Belch,Rest,Sleep Talk,FALSE,Normal,
+Maru,Spheal,255,255,255,255,275,Defense Curl,Rollout,Ice Ball,Yawn,FALSE,Ice,Water
+Mickey,Maushold,255,255,255,255,275,Tidy Up,Population Bomb,Encore,Fake Out,FALSE,Normal,
+Kyubey,Audino,255,255,255,255,255,Wish,Protect,Draining Kiss,After You,TRUE,Normal,Fairy
+Berry,Pachirisu,255,255,255,255,275,Follow Me,Nuzzle,Protect,Super Fang,FALSE,Electric,
+Picasso,Smeargle,255,255,255,255,275,Block,Baby-Doll Eyes,Attract,Yawn,FALSE,Normal,
+Fluffy,Altaria,255,255,255,255,255,Cotton Guard,Return,Hone Claws,Draco Meteor,TRUE,Dragon,Fairy
+Pinky,Skitty,255,255,255,255,275,Baby-Doll Eyes,Assist,Disarming Voice,Sing,FALSE,Normal,

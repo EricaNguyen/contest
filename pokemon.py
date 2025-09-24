@@ -112,14 +112,15 @@ class Pokemon:
         #init from params
         self.name = name
         self.species = species
+        #stat values are each 0-255, but one of the stats can be up to 275 if the pokemon does not hold a mega stone
         self.coolStat = coolStat
         self.toughStat = toughStat
         self.beautyStat = beautyStat
         self.cleverStat = cleverStat
         self.cuteStat = cuteStat
-        self.moves = moves
+        self.moves = moves #list of moves the pokemon can use, up to 4 moves
         self.canMega = canMega
-        self.types = types
+        self.types = types #list of types for this pokemon, up to 2 types
         
         #calc condition score for initial turn order
         self.condition = 0
@@ -161,7 +162,8 @@ class Pokemon:
         
         
     #perform a move
-    def doAppeal(self, moveIndex, currTurnOrder, contestantsList):
+    def doAppeal(self, moveIndex, currTurnOrder, contestantsList, currExcitementLevel):
+        #check if this pokemon is able to move this turn
         #if the pokemon is knocked out, skip its turn
         if self.isKOd == True:
             print(self.name + " the " + self.species + " is knocked out and can no longer move.")
@@ -181,7 +183,7 @@ class Pokemon:
             
             
             # === BASE APPEAL POINTS ===
-            #calculate initial base appeal. Bonuses based on the audience excitement level are handled in stage.py
+            #calculate the appeal points earned for the move
             temp = self.currMove.appeal
             flavorText = ""
             #extra points for moves that work great if the user goes first
@@ -203,7 +205,7 @@ class Pokemon:
                     flavorText = self.name + "'s " + self.currMove.name + " received extra points for its timing."
                     temp += 30
                 else:
-                    flavorText = self.name + "'s " + self.currMove.name + " showed off its appeal fantastically well!"
+                    flavorText = self.name + " showed off its appeal fantastically well!"
                     temp += 50
             #extra random hearts for moves that "vary depending on when it is used" (yes, it's a misleading description from the OG games...)
             elif self.currMove.effectIndex == 10:
@@ -216,6 +218,17 @@ class Pokemon:
                 else:
                     flavorText = "The timing of " + self.name + "'s " + self.currMove.name + " went over fairly well with the audience."
                     temp += bonus * 10
+            #if the move depends on the audience's current excitement level, contestant earns 0,2,3,5 extra hearts for 0,2,3,4 excitement level
+            elif (self.currMove.effectIndex == 18):
+                #bonus hearts based on audience excitement level
+                if currExcitementLevel <= 1:
+                    flavorText = self.name + " didn't show off its appeal well."
+                elif currExcitementLevel == 2 or currExcitementLevel == 3:
+                    flavorText = self.name + " felt the crowd's excitement."
+                    temp += currExcitementLevel * 10
+                else:
+                    flavorText = self.name + " really felt the crowd's excitement!"
+                    temp += 50
             #if the move is 'Affected by how well the previous Pokemon's move went', give 0 hearts if the pokemon in front has more than 3 hearts, 6 if less, and 3 otherwise
             elif self.currMove.effectIndex == 24:
                 if currTurnOrder == 0 or contestantsList[currTurnOrder-1].tempScore == 30:
@@ -497,11 +510,12 @@ class Pokemon:
         if len(self.types) > 1:
             spectacularType = random.choices(population=self.types, weights=[0.75, 0.25], k=1)[0]
             
-        #give 5 bonus hearts (8 bonus hearts if the pokemon mega evolves this turn)
-        if self.canMega == True and self.isMega == False:
-            self.isMega = True
-            self.species = "Mega " + self.species
-            print(self.name + " mega evolved into " + self.species + "!")
+        #give 5 bonus hearts (8 bonus hearts if the pokemon mega evolves)
+        if self.canMega == True:
+            if self.isMega == False:
+                self.isMega = True
+                self.species = "Mega " + self.species
+                print(self.name + " mega evolved into " + self.species + "!")
             print("This is it! Time for a Spectacular Talent! " + SpecMoves[category][spectacularType].upper() + "!!")
             self.changeScore(80)
         else:

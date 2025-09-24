@@ -53,18 +53,6 @@ class Stage:
     def updateExcitementLevel(self, contestant, currTurnOrder):
         #check if the pokemon moved this turn
         if contestant.currMove is not None:
-            #if the move depends on the audience's current excitement level, contestant earns 0,2,3,5 extra hearts for 0,2,3,4 excitement level
-            if (contestant.currMove.effectIndex == 18):
-                #bonus hearts based on audience excitement level
-                if self.excitementLevel <= 1:
-                    print(contestant.name + " didn't show off its appeal well.")
-                elif self.excitementLevel == 2 or self.excitementLevel == 3:
-                    print(contestant.name + " felt the crowd's excitement.")
-                    contestant.changeScore(self.excitementLevel * 10)
-                else:
-                    print(contestant.name + " really felt the crowd's excitement!")
-                    contestant.changeScore(50)
-                    
             #if the pokemon used the same move they used in the previous round and the move's effect does not allow it to repeat, subtract a heart
             if contestant.prevMove is not None and contestant.currMove is contestant.prevMove and contestant.currMove.effectIndex != 19:
                 print("The crowd was disappointed to see " + contestant.name + " repeat the same move...")

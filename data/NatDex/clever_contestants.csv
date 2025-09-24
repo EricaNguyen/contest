@@ -1,0 +1,8 @@
+name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
+Gigi,Farigiraf,255,255,255,275,255,Psychic Terrain,Expanding Force,Trick Room,Psychic Noise,FALSE,Normal,Psychic
+Matcha,Sinistcha,255,255,255,275,255,Matcha Gotcha,Shadow Ball,Hex,Scald,FALSE,Grass,Ghost
+Teru,Banette,255,255,255,255,255,Spite,Destiny Bond,Taunt,Poltergeist,TRUE,Ghost,
+Kiki,Klefki,255,255,255,275,255,Swagger,Foul Play,Fairy Lock,Switcheroo,FALSE,Steel,Fairy
+Shadower,Darkrai,255,255,255,275,255,Dark Void,Nightmare,Dream Eater,Protect,FALSE,Dark,
+Diantha,Gardevoir,255,255,255,255,255,Calm Mind,Stored Power,Hypnosis,Reflect,TRUE,Psychic,Fairy
+Vivian,Vivillon,255,255,255,275,255,Sleep Powder,Dream Eater,Aromatherapy,Rage Powder,FALSE,Bug,Flying

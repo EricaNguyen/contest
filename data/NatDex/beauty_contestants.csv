@@ -1,0 +1,13 @@
+name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
+Aurora,Ninetales,255,255,275,255,255,Snowscape,Blizzard,Aurora Veil,Ice Shard,FALSE,Ice,Fairy
+Selene,Cresselia,255,255,275,255,255,Moonlight,Moonblast,Lunar Dance,Lunar Blessing,FALSE,Psychic,
+Mermaid,Primarina,255,255,275,255,255,Sparkling Aria,Life Dew,Surf,Hydro Cannon,FALSE,Water,Fairy
+Dawn,Piplup,255,255,275,255,255,Bubble Beam,Whirlpool,Hydro Pump,Drill Peck,FALSE,Water,
+Sabrina,Delphox,255,255,255,255,255,Mystical Fire,Psybeam,Heat Wave,Round,TRUE,Fire,Psychic
+Perfume,Weezing,255,255,275,255,255,Strange Steam,Misty Terrain,Misty Explosion,Clear Smog,FALSE,Poison,Fairy
+Amaterasu,Volcarona,255,255,275,255,255,Fiery Dance,Quiver Dance,Bug Buzz,Substitute,FALSE,Bug,Fire
+Tsukuyomi,Ursaluna,255,255,275,255,255,Blood Moon,Moonlight,Earth Power,Calm Mind,FALSE,Ground,Normal
+Crystal,Diancie,255,255,255,255,255,Diamond Storm,Moonblast,Dazzling Gleam,Power Gem,TRUE,Rock,Fairy
+Stella,Terapagos,255,255,275,255,255,Tera Starstorm,Ice Beam,Meteor Beam,Ice Spinner,FALSE,Normal,
+Astro,Jirachi,255,255,275,255,255,Cosmic Power,Doom Desire,Charge Beam,Round,FALSE,Steel,Psychic
+Sakura,Cherrim,255,255,275,255,255,Petal Blizzard,Sunny Day,Morning Sun,Weather Ball,FALSE,Grass,

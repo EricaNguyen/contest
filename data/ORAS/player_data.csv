@@ -1,0 +1,6 @@
+category,name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
+cool,Chuchu,Pikachu,275,255,255,255,255,Thunder Wave,Electro Ball,Meteor Mash,Agility,FALSE,Electric,
+tough,Pika,Pikachu,255,275,255,255,255,Focus Punch,Flying Press,Wild Charge,Dig,FALSE,Electric,
+beauty,Chuchu,Pikachu,255,255,275,255,255,Icicle Crash,Round,Discharge,Flash,FALSE,Electric,
+clever,Pika,Pikachu,255,255,255,275,255,Electric Terrain,Knock Off,Feint,Magnet Rise,FALSE,Electric,
+cute,Chuchu,Pikachu,255,255,255,255,275,Nuzzle,Play Nice,Draining Kiss,Attract,FALSE,Electric,

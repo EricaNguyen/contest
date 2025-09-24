@@ -1,0 +1,6 @@
+category,name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
+cool,Windy,Emolga,275,255,255,255,255,Agility,Electro Ball,Dual Wingbeat,Volt Switch,FALSE,Electric,Flying
+tough,Spike,Togedemaru,255,275,255,255,255,Spiky Shield,Iron Head,Endure,Endeavor,FALSE,Electric,Steel
+beauty,Fae,Dedenne,255,255,275,255,255,Dazzling Gleam,Discharge,Flash,Round,FALSE,Electric,Fairy
+clever,Pikaboo,Mimikyu,255,255,255,275,255,Shadow Sneak,Feint Attack,Taunt,Destiny Bond,FALSE,Ghost,Fairy
+cute,Hangry,Morpeko,255,255,255,255,275,Aura Wheel,Fake Out,Rest,Sleep Talk,FALSE,Electric,Dark

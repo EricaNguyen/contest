@@ -1,0 +1,6 @@
+name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
+Tapu Rilla,Rillaboom,275,255,255,255,255,Grassy Terrain,Grassy Glide,Drum Beating,Frenzy Plant,FALSE,Grass,
+James,Inteleon,275,255,255,255,255,Focus Energy,Snipe Shot,Scale Shot,Aqua Jet,FALSE,Water,
+Cinderella,Cinderace,275,255,255,255,255,Pyro Ball,Court Change,High Jump Kick,Double Kick,FALSE,Fire,
+Cynthia,Garchomp,255,255,255,255,255,Hyper Beam,Roar,Stealth Rock,Dragon Claw,TRUE,Ground,Dragon
+Poe,Corviknight,275,255,255,255,255,Bulk Up,Power Trip,Sky Attack,Iron Head,FALSE,Flying,Steel

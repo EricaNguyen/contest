@@ -9,34 +9,42 @@ import contestMove
 import random
 import csv
 
-#define the player's pokemon, with a preset for each contest category
-def initPlayerMon(category):  
+#define the player's pokemon, with a preset for each contest category read from a csv file
+def initPlayerMon(gameMode, category):  
     player = None
     
-    if category == "cool":
-        moves = ["Thunder Wave", "Electro Ball", "Meteor Mash", "Agility"]
-        player = Pokemon("Chuchu", "Pikachu", 275, 255, 255, 255, 255, moves, False, ["Electric"])
-    elif category == "tough":
-        moves = ["Focus Punch", "Flying Press", "Wild Charge", "Dig"]
-        player = Pokemon("Pika", "Pikachu", 255, 275, 255, 255, 255, moves, False, ["Electric"])
-    elif category == "beauty":
-        moves = ["Icicle Crash", "Round", "Discharge", "Flash"]
-        player = Pokemon("Chuchu", "Pikachu", 255, 255, 275, 255, 255, moves, False, ["Electric"])
-    elif category == "clever":
-        moves = ["Electric Terrain", "Knock Off", "Feint", "Magnet Rise"]
-        player = Pokemon("Pika", "Pikachu", 255, 255, 255, 275, 255, moves, False, ["Electric"])
-    else:
-        moves = ["Nuzzle", "Play Nice", "Draining Kiss", "Attract"]
-        player = Pokemon("Chuchu", "Pikachu", 255, 255, 255, 255, 275, moves, False, ["Electric"])
-    
+    filename = "data/" + gameMode + "/player_data.csv"
+
+    with open(filename, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            if row['category'] == category:
+                #list of moves
+                tempMovepool = [row['move1'], row['move2'], row['move3'], row['move4']]
+                #list of types
+                tempType = [row['type1']]
+                if row['type2'] != "":
+                    tempType.append(row['type2'])
+                #set bool for canMega
+                tempCanMega = False
+                if row['canMega'].upper() == "TRUE":
+                    tempCanMega = True
+                    
+                #make pokemon object
+                player = Pokemon(row['name'], row['species'], int(row['coolStat']), int(row['toughStat']), int(row['beautyStat']), int(row['cleverStat']), int(row['cuteStat']), tempMovepool, tempCanMega, tempType)
+                break
+                
+    if player == None:
+        print("Error reading player_data.csv. Make sure the csv file is formatted correctly.")
+        
     return player
 
 #create NPC opponents by reading data from a csv file, with presets for each category
-def initCPUMons(category): 
+def initCPUMons(gameMode, category): 
     possibleRoster = []
     
     #pick which csv file to read from based on the contest category
-    filename = "data/" + category + "_contestants.csv"
+    filename = "data/" + gameMode + "/" + category + "_contestants.csv"
         
     #read contestant data from csv file
     with open(filename, newline='') as csvfile:
@@ -62,14 +70,21 @@ def initCPUMons(category):
     return chosenContestants
 
 
-#initialize the contest category
-myCategory = "cool"
+#initialize the game mode and contest category based on the contents of init.txt
+gameMode = None #ORAS or NatDex
+myCategory = None
+with open('init.txt', 'r') as txtfile:
+    gameMode = txtfile.readline().strip() #1st line is the game mode
+    myCategory = txtfile.readline().strip() #2nd line is the contest category
 
-contestMove.readMoveData("data/ORAS_movelist.csv")
+#read the data for all the moves available for the given game mode
+contestMove.readMoveData("data/" +gameMode+ "/" + gameMode + "_movelist.csv")
 
 #initialize the contestants
-mon1 = initPlayerMon(myCategory)
-CPUContestants = initCPUMons(myCategory)
+#player
+mon1 = initPlayerMon(gameMode, myCategory)
+#NPC
+CPUContestants = initCPUMons(gameMode, myCategory)
 mon2 = CPUContestants[0]
 mon3 = CPUContestants[1]
 mon4 = CPUContestants[2]
@@ -81,7 +96,7 @@ myStage = Stage(myCategory, contestants)
 
 
 #RUN THE GAME
-print("WELCOME TO THE " + stage.categoryNouns[myStage.category].upper() + " CONTEST!!!")
+print("WELCOME TO THE " + gameMode.upper() + " " + stage.categoryNouns[myStage.category].upper() + " CONTEST!!!")
 myStage.startGame()
 
 """
@@ -96,7 +111,7 @@ for i in range (0, 5):
         
     #each pokemon performs a move in the order decided for this round
     for i in range(0, 4):
-        myStage.getMonsInTurnOrder()[i].doAppeal(random.randint(0,3), i, myStage.getMonsInTurnOrder()) #perform move
+        myStage.getMonsInTurnOrder()[i].doAppeal(random.randint(0,3), i, myStage.getMonsInTurnOrder(), myStage.excitementLevel) #perform move
         myStage.getMonsInTurnOrder()[i].doJam(i, myStage.getMonsInTurnOrder()) #jam other pokemon
         myStage.getMonsInTurnOrder()[i].makeOthersNervous(i, myStage.getMonsInTurnOrder()) #make other pokemon nervous
         myStage.updateExcitementLevel(myStage.getMonsInTurnOrder()[i], i) #update excitement level
@@ -113,6 +128,7 @@ print("(Your Pokemon is " + mon1.name + " the " + mon1.species +")")
 for i in range (0, 5):
     #print info for the beginning of the current round
     print(str(myStage))
+    print("Turn order:")
     myStage.printTurnOrderList()
     print("---\n")
     
@@ -141,9 +157,9 @@ for i in range (0, 5):
     #each pokemon performs a move in the order decided for this round
     for i in range(0, 4):
         if myStage.getMonsInTurnOrder()[i] is mon1:
-            myStage.getMonsInTurnOrder()[i].doAppeal(int(choice), i, myStage.getMonsInTurnOrder()) #player performs a move
+            myStage.getMonsInTurnOrder()[i].doAppeal(int(choice), i, myStage.getMonsInTurnOrder(), myStage.excitementLevel) #player performs a move
         else:
-            myStage.getMonsInTurnOrder()[i].doAppeal(random.randint(0,3), i, myStage.getMonsInTurnOrder()) #NPC performs a random move
+            myStage.getMonsInTurnOrder()[i].doAppeal(random.randint(0,3), i, myStage.getMonsInTurnOrder(), myStage.excitementLevel) #NPC performs a random move
         myStage.getMonsInTurnOrder()[i].doJam(i, myStage.getMonsInTurnOrder()) #jam other pokemon
         myStage.getMonsInTurnOrder()[i].makeOthersNervous(i, myStage.getMonsInTurnOrder()) #make other pokemon nervous
         myStage.updateExcitementLevel(myStage.getMonsInTurnOrder()[i], i) #update audience excitement level

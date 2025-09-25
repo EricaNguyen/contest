@@ -2,7 +2,7 @@ import pokemon
 import contestMove
 import random
 
-#this dictionary keeps track of the noun forms of the contest category types, for grammatical reasons
+#this dictionary keeps track of the noun forms of the contest category types, for grammatically correct flavor text
 categoryNouns = {
     "cool": "Coolness",
     "tough": "Toughness",
@@ -31,6 +31,7 @@ class Stage:
         return "\n=======\nCurrent Round #: " + str(self.currRound) + ", Audience excitement level: " + str(self.excitementLevel)
         
     def printTurnOrderList(self):
+        print("Turn order:")
         listSize = len(self.contestants)
         for i in range(0, listSize):
             #print an asterisk in front of contestants that the audience is expecting a combo from
@@ -139,7 +140,7 @@ class Stage:
         print("-")
         print("RESULTS:")
         for contestant in self.contestants:
-            print(contestant.name + " the " + contestant.species + " - Condition: " +str(int(contestant.condition)) + ", Appeal: " + str(int(contestant.currScore * 2)) + ", Total: " + str(int(contestant.totalScore)))
+            print(contestant.name + " the " + contestant.species + " - Condition: " +str(int(contestant.condition)) + ", Appeal: " + str(int(contestant.currScore * 2)) + ", Total score: " + str(int(contestant.totalScore)))
             
         #announce the winner. TODO: print multiple winners if there is a tie
         print("---")

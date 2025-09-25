@@ -118,7 +118,7 @@ class Pokemon:
         self.beautyStat = beautyStat
         self.cleverStat = cleverStat
         self.cuteStat = cuteStat
-        self.moves = moves #list of moves the pokemon can use, up to 4 moves
+        self.moves = moves #a list of names of moves that this pokemon can use, up to 4 moves
         self.canMega = canMega
         self.types = types #list of types for this pokemon, up to 2 types
         
@@ -151,7 +151,7 @@ class Pokemon:
             else:
                 return random.randint(0, 1) == 1
         
-        #for other rounds
+        #for other rounds, compare priority and points earned from the most recent round
         if(self.priority != other.priority):
             return self.priority > other.priority
         else:
@@ -160,15 +160,20 @@ class Pokemon:
             else:
                 return self.tempScore > other.tempScore
         
-        
     #perform a move
+    def doMove(self, moveIndex, currTurnOrder, contestantsList, currExcitementLevel):
+        self.doAppeal(moveIndex, currTurnOrder, contestantsList, currExcitementLevel)
+        self.doJam(currTurnOrder, contestantsList)
+        self.makeOthersNervous(currTurnOrder, contestantsList)
+        
+    #carry out a move and earn points for the current round
     def doAppeal(self, moveIndex, currTurnOrder, contestantsList, currExcitementLevel):
-        #check if this pokemon is able to move this turn
+        #check if this pokemon is able to move this round
         #if the pokemon is knocked out, skip its turn
         if self.isKOd == True:
             print(self.name + " the " + self.species + " is knocked out and can no longer move.")
             self.isExpectingCombo = False
-        #if the pokemon used a move the previous turn that requires it to recharge this turn, skip its turn
+        #if the pokemon used a move the previous round that requires it to recharge this round, skip its turn
         elif self.prevMove is not None and self.prevMove.effectIndex == 12:
             print("All " + self.name + " the " + self.species + " can do is watch the others.")
             self.isExpectingCombo = False
@@ -428,7 +433,7 @@ class Pokemon:
                 print("Need to write implementation for jam target: " + self.currMove.jamTarget)
                 
                 
-    #chance of making later pokemon nervous, if applicable for the this pokemon's current move
+    #make the other pokemon going after this pokemon nervous
     def makeOthersNervous(self, currTurnOrder, contestantsList):
         if not(self.currMove == None or self.currMove.effectIndex != 14 or currTurnOrder == 3):
             print(self.name + " tried to unnerve the Pokemon waiting for their turns!")
@@ -443,7 +448,7 @@ class Pokemon:
                 print("But it failed!")
         
         
-    #add/subtract hearts for the current round    
+    #add/subtract hearts for the current round. 1 heart = 10 points 
     def changeScore(self, scoreChange):
         if scoreChange < 0:
             print(self.name + " lost " + str(int(scoreChange/10)) + " heart(s)...")
@@ -505,7 +510,7 @@ class Pokemon:
         
     #implement bonus points, mega evolution, and flavor text when this pokemon performs a Spectacular Talent (called by stage.py when this pokemon maxes out the audience meter)
     def doSpectacular(self, category):
-        #make the element type of the spectacular talent the same as the pokemon. If the pokemon is dual-typed, choose randomly between the two types with the primary type weighted
+        #make the element type of the spectacular talent the same as the pokemon. If the pokemon is dual-typed, choose randomly between the two types with the odds weighed in favor of the primary type
         spectacularType = self.types[0]
         if len(self.types) > 1:
             spectacularType = random.choices(population=self.types, weights=[0.75, 0.25], k=1)[0]

@@ -1,8 +1,8 @@
 import csv
 #this file contains data on all moves
 
-#given an id nuber, this dictionary keeps track of a move's effect
-#format: [description, appeal, jam, jam target]
+#given an effectIndex id number as a key, this dictionary keeps track of a move's effect
+#format is effectIndex: [description, appeal, jam, jam target]
 effectDict = {
     #basic attack (definition done, game mechs done, move list done)
     0: ["Quite an appealing move.", 40, 0, 'no jam'],
@@ -71,7 +71,6 @@ class Move:
         self.jamTarget = effectDict[effectIndex][3] #options: no jam, front, all, same type, high expectation, successful, energy only
         self.startsCombo = startsCombo #True if this move can be the start of a combo
         self.combosWith = combosWith #list the names of the moves that this move starts a combo with
-        #additional effects of the move go here
     
     def __str__(self):
         return self.name + " (" + self.category.upper() + ", Appeal: " + str(int(self.appeal/10)) + ", Jam: " + str(int(self.jam/10)) + ")" + ", " + effectDict[self.effectIndex][0]
@@ -95,7 +94,7 @@ def readMoveData(filename):
         reader = csv.DictReader(csvfile)
         for row in reader:
             #name, category, effectIndex, startsCombo, combosWith
-            if row['startsCombo'].strip() == "FALSE":
+            if row['startsCombo'].strip().upper() == "FALSE":
                 moveList[row['name']] = Move(row['name'], row['category'], int(row['effectIndex']))
             else:
                 mylist = row['combosWith'].split('|')

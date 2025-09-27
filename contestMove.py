@@ -28,10 +28,10 @@ effectDict = {
     #make other pokemon nervous (definition done, game mechs done, move list done)
     14: ["Makes the remaining Pokemon nervous.", 20, 0, 'no jam'],
     #related to audience excitement level (definition done, game mechs done, move list done)
-    15: ["Excites the audience a lot if used first", 30, 0, 'no jam'],
-    16: ["Excites the audience a lot if used last", 30, 0, 'no jam'],
-    17: ["Excites the audience in any kind of contest", 20, 0, 'no jam'],
-    18: ["Works better the more the crowd is excited", 10, 0, 'no jam'],
+    15: ["Excites the audience a lot if used first.", 30, 0, 'no jam'],
+    16: ["Excites the audience a lot if used last.", 30, 0, 'no jam'],
+    17: ["Excites the audience in any kind of contest.", 20, 0, 'no jam'],
+    18: ["Works better the more the crowd is excited.", 10, 0, 'no jam'],
     #can be repeated without boring the audience (definition done, game mechs done, move list done)
     19: ["An appealing move that can be used repeatedly without boring the audience.", 30, 0, 'no jam'],
     #jamming moves with no extra conditions or effects (definition done, game mechs done, move list done)

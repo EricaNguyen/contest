@@ -381,10 +381,18 @@ class Pokemon:
                             contestantsList[i].changeScore(jamAmount)
             #if jamming effect is dependent on whether the other contestants are starting a combo
             elif self.currMove.jamTarget == 'high expectation':
-                if self.currMove.jam >= 0:
+                if self.currMove.jam >= 0: #make audience lose expectations of a combo
                     print(self.name + " tried to lower the audience's expectations of the other Pokemon!")
-                for i in range(0, currTurnOrder):
-                    if self.currMove.jam < 0:
+                    success = False
+                    for i in range(0, currTurnOrder):
+                        if contestantsList[i].isExpectingCombo == True:
+                            print("The audience is no longer expecting a combo from " + contestantsList[i].name + ".")
+                            success = True
+                        contestantsList[i].isExpectingCombo = False
+                    if success == False:
+                        print("But it failed!")
+                else: #badly startles pokemon that are starting a combo
+                    for i in range(0, currTurnOrder): 
                         #check if the pokemon should be startled
                         if contestantsList[i].isCalm == True:
                             print(contestantsList[i].name + " was not startled.")
@@ -392,7 +400,6 @@ class Pokemon:
                         elif contestantsList[i].isVeryCalm == True:
                             print(contestantsList[i].name + " is completely oblivious to any attempts to startle.")
                         else:
-                            #badly startles pokemon that are starting a combo
                             print(contestantsList[i].name + " was startled!")
                             jamAmount = self.currMove.jam
                             if contestantsList[i].isExpectingCombo == True:
@@ -400,16 +407,16 @@ class Pokemon:
                             if contestantsList[i].easyStartle == True:
                                 jamAmount *= 2
                             contestantsList[i].changeScore(jamAmount)
-                    else:
-                        #make audience lose expectations of a combo
-                        if contestantsList[i].isExpectingCombo == True:
-                            print("The audience is no longer expecting a combo from " + contestantsList[i].name + ".")
-                        contestantsList[i].isExpectingCombo = False
             #if the move doesn't cause other pokemon to lose hearts, but instead lowers their pumpedUp stat
             elif self.currMove.jamTarget == 'energy only':
                 print("It tried to taunt the Pokemon that are feeling pumped up!")
+                success = False
                 for i in range(0, currTurnOrder):
-                    contestantsList[i].changePumpedUp(-1)
+                    if contestantsList[i].pumpedUp > 0:
+                        success = True
+                        contestantsList[i].changePumpedUp(-1)
+                if success == False:
+                    print("But it failed!")
             #if jamming amount is dependent on matching the move type of the other contestants
             elif self.currMove.jamTarget == 'same type':
                 for i in range(0, currTurnOrder):
@@ -440,7 +447,7 @@ class Pokemon:
             success = False
             for i in range(currTurnOrder+1, 4):
                 #chance of making pokemon nervous
-                if random.random() < 0.5 ** (1 + contestantsList[i].pumpedUp) and contestantsList[i].isNervous == False:
+                if random.random() < 0.5 ** (1 + contestantsList[i].pumpedUp) and contestantsList[i].isNervous == False and contestantsList[i].isKOd == False:
                     contestantsList[i].isNervous = True
                     print(contestantsList[i].name + " became nervous!")
                     success = True

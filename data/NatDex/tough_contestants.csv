@@ -1,6 +1,6 @@
 name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
-Bunbun,Lopunny,255,255,255,255,255,Close Combat,U-turn,Endure,Endeavor,TRUE,Normal,Fighting
-Melly,Melmetal,255,275,255,255,255,Double Iron Bash,Iron Defense,Body Press,Heavy Slam,FALSE,Steel,
+Bunbun,Lopunny,255,255,255,255,255,Close Combat,U-turn,Brutal Swing,Headbutt,TRUE,Normal,Fighting
 Yamamoto,Swalot,255,275,255,255,255,Stockpile,Spit Up,Swallow,Gunk Shot,FALSE,Poison,
 Chocolatl,Clodsire,255,275,255,255,255,Earthquake,Sludge Bomb,Stone Edge,Poison Jab,FALSE,Poison,Ground
-Clark,Palafin,255,275,255,255,255,Jet Punch,Flip Turn,Boomburst,Close Combat,FALSE,Water,
+Clark,Palafin,255,275,255,255,255,Jet Punch,Flip Turn,Boomburst,Wave Crash,FALSE,Water,
+Spike,Togedemaru,255,275,255,255,255,Spiky Shield,Iron Head,Endure,Endeavor,FALSE,Electric,Steel

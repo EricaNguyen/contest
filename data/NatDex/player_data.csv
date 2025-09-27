@@ -1,6 +1,6 @@
 category,name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
-cool,Windy,Emolga,275,255,255,255,255,Agility,Electro Ball,Dual Wingbeat,Volt Switch,FALSE,Electric,Flying
-tough,Spike,Togedemaru,255,275,255,255,255,Spiky Shield,Iron Head,Endure,Endeavor,FALSE,Electric,Steel
-beauty,Fae,Dedenne,255,255,275,255,255,Dazzling Gleam,Discharge,Flash,Round,FALSE,Electric,Fairy
-clever,Pikaboo,Mimikyu,255,255,255,275,255,Shadow Sneak,Feint Attack,Taunt,Destiny Bond,FALSE,Ghost,Fairy
-cute,Hangry,Morpeko,255,255,255,255,275,Aura Wheel,Fake Out,Rest,Sleep Talk,FALSE,Electric,Dark
+cool,Zippy,Regieleki,275,255,255,255,255,Electric Terrain,Rising Voltage,Extreme Speed,Thunder Cage,FALSE,Electric,
+tough,Mel,Melmetal,255,275,255,255,255,Double Iron Bash,Iron Defense,Body Press,Heavy Slam,FALSE,Steel,
+beauty,Mermaid,Primarina,255,255,275,255,255,Sparkling Aria,Life Dew,Surf,Hydro Cannon,FALSE,Water,Fairy
+clever,Teru,Banette,255,255,255,255,255,Spite,Destiny Bond,Taunt,Poltergeist,TRUE,Ghost,
+cute,Ichika,Alcremie,255,255,255,255,275,Baby-Doll Eyes,Decorate,Sweet Scent,Alluring Voice,FALSE,Fairy,

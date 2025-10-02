@@ -1,6 +1,6 @@
 category,name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
 cool,Zippy,Regieleki,275,255,255,255,255,Electric Terrain,Rising Voltage,Extreme Speed,Thunder Cage,FALSE,Electric,
 tough,Mel,Melmetal,255,275,255,255,255,Double Iron Bash,Iron Defense,Body Press,Heavy Slam,FALSE,Steel,
-beauty,Mermaid,Primarina,255,255,275,255,255,Sparkling Aria,Life Dew,Surf,Hydro Cannon,FALSE,Water,Fairy
+beauty,Mermaid,Primarina,255,255,275,255,255,Sparkling Aria,Life Dew,Aqua Ring,Moonblast,FALSE,Water,Fairy
 clever,Teru,Banette,255,255,255,255,255,Spite,Destiny Bond,Taunt,Poltergeist,TRUE,Ghost,
 cute,Ichika,Alcremie,255,255,255,255,275,Baby-Doll Eyes,Decorate,Sweet Scent,Alluring Voice,FALSE,Fairy,

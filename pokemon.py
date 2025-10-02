@@ -314,12 +314,14 @@ class Pokemon:
                     contestantsList[i].priority = random.random()
             
             #if this move completes a combo, earn 3 extra hearts
+            isComboCompleted = False
             if self.isExpectingCombo == True and self.prevMove is not None and self.prevMove.startsCombo == True and self.currMove.name in self.prevMove.combosWith:
                 print(self.name + "'s move combo went over well with the audience!")
                 self.changeScore(30)
+                isComboCompleted = True
             
-            #check if this move can start a combo
-            if self.currMove.startsCombo == True:
+            #check if this move can start a combo. A move that just completed a combo this turn cannot start a new combo.
+            if self.currMove.startsCombo == True and isComboCompleted == False:
                 self.isExpectingCombo = True
                 print("Anticipation is swelling for a combo on the next turn!")
             else:
@@ -474,11 +476,6 @@ class Pokemon:
                 self.pumpedUp = min(self.pumpedUp + 1, 3)
                 print(self.name + " got even more pumped up than usual!\n" + self.name + " gained +1 energy.")
     
-    def getTempScore(self):
-        return self.tempScore
-        
-    def getCurrScore(self):
-        return self.currScore
     
     #setup for next round
     def nextRound(self):

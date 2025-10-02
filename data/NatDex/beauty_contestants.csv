@@ -4,10 +4,14 @@ Selene,Cresselia,255,255,275,255,255,Moonlight,Moonblast,Lunar Dance,Lunar Bless
 Dawn,Piplup,255,255,275,255,255,Bubble Beam,Whirlpool,Hydro Pump,Drill Peck,FALSE,Water,
 Sabrina,Delphox,255,255,255,255,255,Mystical Fire,Psybeam,Heat Wave,Round,TRUE,Fire,Psychic
 Perfume,Weezing,255,255,275,255,255,Strange Steam,Misty Terrain,Misty Explosion,Clear Smog,FALSE,Poison,Fairy
-Amaterasu,Volcarona,255,255,275,255,255,Fiery Dance,Quiver Dance,Bug Buzz,Substitute,FALSE,Bug,Fire
+Amaterasu,Volcarona,255,255,275,255,255,Fiery Dance,Silver Wind,Bug Buzz,Substitute,FALSE,Bug,Fire
 Tsukuyomi,Ursaluna,255,255,275,255,255,Blood Moon,Moonlight,Earth Power,Calm Mind,FALSE,Ground,Normal
 Crystal,Diancie,255,255,255,255,255,Diamond Storm,Moonblast,Dazzling Gleam,Power Gem,TRUE,Rock,Fairy
 Stella,Terapagos,255,255,275,255,255,Tera Starstorm,Ice Beam,Flash Cannon,Ice Spinner,FALSE,Normal,
-Astro,Jirachi,255,255,275,255,255,Cosmic Power,Doom Desire,Meteor Beam,Round,FALSE,Steel,Psychic
+Astro,Jirachi,255,255,275,255,255,Cosmic Power,Doom Desire,Meteor Beam,Charge Beam,FALSE,Steel,Psychic
 Sakura,Cherrim,255,255,275,255,255,Petal Blizzard,Sunny Day,Morning Sun,Weather Ball,FALSE,Grass,
-Fae,Dedenne,255,255,275,255,255,Dazzling Gleam,Discharge,Flash,Round,FALSE,Electric,Fairy
+Fae,Dedenne,255,255,275,255,255,Dazzling Gleam,Discharge,Electroweb,Round,FALSE,Electric,Fairy
+Kokoro,Oricorio,255,255,275,255,255,Revelation Dance,Feather Dance,Safeguard,Quiver Dance,FALSE,Ghost,Flying
+Shoto,White Kyurem,255,255,275,255,255,Fusion Flare,Draco Meteor,Ice Burn,Glaciate,FALSE,Dragon,Ice
+Melody,Meloetta,255,255,275,255,255,Relic Song,Perish Song,Round,Psyshock,FALSE,Normal,Fighting
+Flame,Typhlosion,255,255,275,255,255,Infernal Parade,Burning Jealousy,Will-O-Wisp,Lava Plume,FALSE,Fire,Ghost

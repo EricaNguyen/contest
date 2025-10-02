@@ -1,12 +1,18 @@
 name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
-Rimi,Ribombee,255,255,255,255,275,Pollen Puff,Struggle Bug,U-turn,Moonblast,FALSE,Bug,Fairy
+Rimi,Ribombee,255,255,255,255,275,Pollen Puff,Struggle Bug,U-turn,Skitter Smack,FALSE,Bug,Fairy
 Earl,Polteageist,255,255,255,255,275,Teatime,Aromatic Mist,Metronome,Withdraw,FALSE,Ghost,
-Chewy,Skwovet,255,255,255,255,275,Stuff Cheeks,Belch,Rest,Sleep Talk,FALSE,Normal,
-Maru,Spheal,255,255,255,255,275,Defense Curl,Rollout,Ice Ball,Yawn,FALSE,Ice,Water
+Mochi,Gulpin,255,255,255,255,275,Stuff Cheeks,Belch,Rest,Sleep Talk,FALSE,Poison,
+Maru,Spheal,255,255,255,255,275,Defense Curl,Rollout,Ice Ball,Belly Drum,FALSE,Ice,Water
 Mickey,Maushold,255,255,255,255,275,Tidy Up,Population Bomb,Encore,Fake Out,FALSE,Normal,
 Kyubey,Audino,255,255,255,255,255,Wish,Protect,Draining Kiss,After You,TRUE,Normal,Fairy
 Berry,Pachirisu,255,255,255,255,275,Follow Me,Nuzzle,Protect,Super Fang,FALSE,Electric,
-Picasso,Smeargle,255,255,255,255,275,Block,Baby-Doll Eyes,Attract,Yawn,FALSE,Normal,
 Fluffy,Altaria,255,255,255,255,255,Cotton Guard,Return,Hone Claws,Draco Meteor,TRUE,Dragon,Fairy
-Pinky,Skitty,255,255,255,255,275,Baby-Doll Eyes,Assist,Disarming Voice,Sing,FALSE,Normal,
+Pinky,Skitty,255,255,255,255,275,Baby-Doll Eyes,Attract,Disarming Voice,Sing,FALSE,Normal,
 Hangry,Morpeko,255,255,255,255,275,Aura Wheel,Fake Out,Fling,Baton Pass,FALSE,Electric,Dark
+Cuddles,Flareon,255,255,255,255,275,Ember,Charm,Copycat,Heat Wave,FALSE,Fire,
+Chompy,Mawile,255,255,255,255,255,Play Rough,Astonish,Growl,False Swipe,TRUE,Steel,Fairy
+Hoppy,Jumpluff,255,255,255,255,275,Grass Knot,Bounce,Splash,Encore,FALSE,Grass,Flying
+Hazelnut,Buneary,255,255,255,255,275,Teeter Dance,Dizzy Punch,Return,Baby-Doll Eyes,FALSE,Normal,
+Pancakes,Raichu,255,255,255,255,275,Celebrate,Present,Play Nice,Thunder Wave,FALSE,Electric,Psychic
+Ena,Enamorus,255,255,255,255,275,Springtide Storm,Draining Kiss,Healing Wish,Flatter,FALSE,Fairy,Flying
+Pebbles,Larvitar,255,255,255,255,275,Stomping Tantrum,Sandstorm,Facade,Substitute,FALSE,Rock,Ground

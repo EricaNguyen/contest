@@ -52,6 +52,9 @@ class Stage:
     
     #update the audience's excitement level after a given pokemon has performed their move, then add/subtract bonus hearts as needed
     def updateExcitementLevel(self, contestant, currTurnOrder):
+        #keep track of how much to change the audience excitement level
+        change = 0
+        
         #check if the pokemon moved this turn
         if contestant.currMove is not None:
             #if the pokemon used the same move they used in the previous round and the move's effect does not allow it to repeat, subtract a heart
@@ -63,24 +66,23 @@ class Stage:
                 #lower excitement by 2 instead of 1 if the move description is 'Makes the audience quickly grow bored when an appeal move has little effect' (need further research to see if this effect is correct)
                 if contestant.currMove.effectIndex == 29:
                     print("But "+ contestant.name + "'s show of " + categoryNouns[contestant.currMove.category] + " went very poorly with this audience...")
-                    self.excitementLevel = max(0, self.excitementLevel - 2)
+                    change = -2
                     contestant.changeScore(-10)
                 else:
-                    #print("contestant.currMove.category = " + contestant.currMove.category + ", stage category = " + self.category)
                     print("But "+ contestant.name + "'s show of " + categoryNouns[contestant.currMove.category] + " didn't go over very well with this audience.")
-                    self.excitementLevel = max(0, self.excitementLevel - 1)
+                    change = -1
                     contestant.changeScore(-10)
             #if the excitement meter isnt frozen 
             elif(self.isExcitementStopped == False):
                 #the move matched the contest category and meets the requirements for "excites the audience a lot", raise excitement by 2 instead of 1
                 if (contestant.currMove.category == self.category and (contestant.currMove.effectIndex == 15 and currTurnOrder == 0 or contestant.currMove.effectIndex == 16 and currTurnOrder == 3)):
                     print(contestant.name + "'s move really, really excited the audience!")
-                    self.excitementLevel = min(self.excitementLevel + 2, 5)
+                    change = 2
                     contestant.changeScore(20)
                 #if the move was not a repeat and the move category matched the contest category or always raises excitement regardless of category, raise excitement and add a heart
                 elif (contestant.currMove.category == self.category or contestant.currMove.effectIndex == 17):
                     print(contestant.name + "'s " + categoryNouns[contestant.currMove.category] + " really excited the audience!")
-                    self.excitementLevel += 1
+                    change = 1
                     contestant.changeScore(10)
             
             #if the pokemon uses a move that stops the excitement meter from growing, apply that effect for the rest of the current round
@@ -88,8 +90,8 @@ class Stage:
                 self.isExcitementStopped = True
                 print(contestant.name + " became the center of attention.")
                 
-        #after all checks above are done, see the current audience excitement level
-        print("Audience excitement level: " + str(self.excitementLevel))
+        #after all checks above are done, calculate the current audience excitement level and display it
+        self.changeExcitementLevel(change)
         
         #constestant performs a Spectacular Talent if the audience meter is maxed out
         if self.excitementLevel >= 5:
@@ -97,8 +99,17 @@ class Stage:
             contestant.doSpectacular(self.category)
             #reset the excitement level
             self.excitementLevel = 0
-            print("Audience excitement level: " + str(self.excitementLevel))
+            print("Audience excitement level: 5 --> 0")
     
+    #helper method for changing the excitement level
+    def changeExcitementLevel(self, change):
+        if change == 0 or change < 0 and self.excitementLevel <= 0:
+            print("Audience excitement level: " + str(self.excitementLevel))
+        else:
+            oldLevel = self.excitementLevel
+            self.excitementLevel = max(min(self.excitementLevel + change, 5), 0)
+            print("Audience excitement level: " + str(oldLevel) + " --> " + str(self.excitementLevel))
+        
     
     #update the state of the game to the next round
     def nextRound(self):

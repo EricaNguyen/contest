@@ -30,7 +30,7 @@ Dark Pulse,cool,0,FALSE,
 Dragon Claw,cool,0,FALSE,
 Fire Fang,cool,0,FALSE,
 Focus Blast,cool,0,FALSE,
-Force Palm,cool,0,TRUE,Hex|Smelling Salts
+Force Palm,cool,0,TRUE,Hex|Infernal Parade|Smelling Salts
 Glacial Lance,cool,0,FALSE,
 Horn Attack,cool,0,FALSE,
 Hyper Drill,cool,0,FALSE,
@@ -120,10 +120,10 @@ Light Screen,beauty,3,FALSE,
 Safeguard,beauty,3,FALSE,
 Defend Order,clever,3,FALSE,
 Fly,clever,3,FALSE,
-Grass Whistle,clever,3,TRUE,Dream Eater|Hex|Nightmare|Wake-Up Slap
+Grass Whistle,clever,3,TRUE,Dream Eater|Hex|Infernal Parade|Nightmare|Wake-Up Slap
 Odor Sleuth,clever,3,FALSE,
 Reflect,clever,3,FALSE,
-Burning Bulwark,cool,3,TRUE,Hex
+Burning Bulwark,cool,3,TRUE,Hex|Infernal Parade
 Defense Curl,cute,3,TRUE,Rollout|Ice Ball
 Protect,cute,3,FALSE,
 Refresh,cute,3,FALSE,
@@ -154,7 +154,7 @@ Minimize,cute,4,FALSE,
 Rest,cute,4,TRUE,Snore|Sleep Talk
 Shelter,cute,4,FALSE,
 Acid Armor,tough,4,TRUE,Body Press
-Baneful Bunker,tough,4,TRUE,Hex|Venom Drench|Venoshock
+Baneful Bunker,tough,4,TRUE,Barb Barrage|Hex|Infernal Parade|Venom Drench|Venoshock
 Iron Defense,tough,4,TRUE,Body Press
 Obstruct,tough,4,FALSE,
 Spiky Shield,tough,4,FALSE,
@@ -196,7 +196,6 @@ Stockpile,tough,5,TRUE,Spit Up|Swallow
 Aqua Step,beauty,6,FALSE,
 Charge Beam,beauty,6,FALSE,
 Fiery Dance,beauty,6,FALSE,
-Meteor Beam,beauty,6,FALSE,
 Torch Song,beauty,6,FALSE,
 Beat Up,clever,6,FALSE,
 Mystical Power,clever,6,TRUE,Baton Pass|Stored Power
@@ -249,14 +248,13 @@ Facade,cute,8,FALSE,
 Growl,cute,8,FALSE,
 Struggle Bug,cute,8,FALSE,
 Tail Whip,cute,8,FALSE,
-Beak Blast,tough,8,TRUE,Hex
+Beak Blast,tough,8,TRUE,Hex|Infernal Parade
 Counter,tough,8,FALSE,
 Endeavor,tough,8,FALSE,
 Focus Punch,tough,8,FALSE,
 Payback,tough,8,FALSE,
 Revenge,tough,8,FALSE,
 Shell Trap,tough,8,FALSE,
-Electro Shot,beauty,9,FALSE,
 Fusion Flare,beauty,9,FALSE,
 Assurance,clever,9,FALSE,
 Fusion Bolt,cool,9,FALSE,
@@ -371,7 +369,7 @@ Final Gambit,tough,13,FALSE,
 Memento,tough,13,FALSE,
 Mean Look,beauty,14,TRUE,Explosion|Memento|Misty Explosion|Perish Song|Self-Destruct
 Relic Song,beauty,14,FALSE,
-Dark Void,clever,14,TRUE,Dream Eater|Hex|Nightmare|Wake-Up Slap
+Dark Void,clever,14,TRUE,Dream Eater|Hex|Infernal Parade|Nightmare|Wake-Up Slap
 Disable,clever,14,FALSE,
 Flatter,clever,14,FALSE,
 Gravity,clever,14,TRUE,Grav Apple
@@ -381,7 +379,7 @@ Psychic Noise,clever,14,FALSE,
 Spider Web,clever,14,TRUE,Explosion|Memento|Misty Explosion|Perish Song|Self-Destruct
 Spikes,clever,14,TRUE,Circle Throw|Dragon Tail|Roar|Whirlwind
 Telekinesis,clever,14,FALSE,
-Toxic Spikes,clever,14,TRUE,Hex|Venom Drench|Venoshock|Circle Throw|Dragon Tail|Roar|Whirlwind
+Toxic Spikes,clever,14,TRUE,Barb Barrage|Hex|Infernal Parade|Venom Drench|Venoshock|Circle Throw|Dragon Tail|Roar|Whirlwind
 Worry Seed,clever,14,FALSE,
 Ceaseless Edge,cool,14,TRUE,Circle Throw|Dragon Tail|Whirlwind|Roar
 Stealth Rock,cool,14,TRUE,Circle Throw|Dragon Tail|Whirlwind|Roar
@@ -390,9 +388,9 @@ Throat Chop,cool,14,FALSE,
 Attract,cute,14,FALSE,
 Block,cute,14,TRUE,Explosion|Memento|Misty Explosion|Perish Song|Self-Destruct
 Encore,cute,14,TRUE,Counter|Destiny Bond|Grudge|King's Shield|Metal Burst|Mirror Coat|Shell Trap|Spite
-Sing,cute,14,TRUE,Dream Eater|Hex|Nightmare|Wake-Up Slap
+Sing,cute,14,TRUE,Dream Eater|Hex|Infernal Parade|Nightmare|Wake-Up Slap
 Sweet Kiss,cute,14,FALSE,
-Yawn,cute,14,TRUE,Dream Eater|Hex|Nightmare|Wake-Up Slap
+Yawn,cute,14,TRUE,Dream Eater|Hex|Infernal Parade|Nightmare|Wake-Up Slap
 Scald,tough,14,FALSE,
 Scorching Sands,tough,14,FALSE,
 Torment,tough,14,TRUE,Counter|Destiny Bond|Grudge|King's Shield|Metal Burst|Mirror Coat|Shell Trap|Spite
@@ -418,7 +416,7 @@ Work Up,tough,15,FALSE,
 Diamond Storm,beauty,16,FALSE,
 Doom Desire,beauty,16,FALSE,
 Icicle Crash,beauty,16,FALSE,
-Mortal Spin,beauty,16,TRUE,Hex|Venom Drench|Venoshock
+Mortal Spin,beauty,16,TRUE,Barb Barrage|Hex|Infernal Parade|Venom Drench|Venoshock
 Sacred Fire,beauty,16,FALSE,
 Steam Eruption,beauty,16,FALSE,
 Aeroblast,cool,16,FALSE,
@@ -437,13 +435,13 @@ Water Pledge,beauty,17,FALSE,
 Freezing Glare,clever,17,FALSE,
 Pay Day,clever,17,FALSE,
 Revival Blessing,clever,17,FALSE,
+Tera Blast,clever,17,FALSE,
 Sacred Sword,cool,17,FALSE,
 Storm Throw,cool,17,FALSE,
 Thunderous Kick,cool,17,FALSE,
 Celebrate,cute,17,TRUE,Bestow|Fling|Present
 Happy Hour,cute,17,TRUE,Bestow|Fling|Present
 Mud Sport,cute,17,FALSE,
-Pollen Puff,cute,17,FALSE,
 Water Sport,cute,17,FALSE,
 Chip Away,tough,17,FALSE,
 Darkest Lariat,tough,17,FALSE,
@@ -484,7 +482,6 @@ Kinesis,clever,19,FALSE,
 Multi-Attack,clever,19,FALSE,
 Night Shade,clever,19,FALSE,
 Photon Geyser,clever,19,FALSE,
-Tera Blast,clever,19,FALSE,
 Transform,clever,19,FALSE,
 Barb Barrage,cool,19,FALSE,
 Blaze Kick,cool,19,FALSE,
@@ -509,6 +506,7 @@ Sunsteel Strike,cool,19,FALSE,
 Triple Kick,cool,19,FALSE,
 Aura Wheel,cute,19,TRUE,Baton Pass|Electro Ball
 Heart Stamp,cute,19,FALSE,
+Pollen Puff,cute,19,FALSE,
 Present,cute,19,FALSE,
 Rollout,cute,19,FALSE,
 Bone Club,tough,19,FALSE,
@@ -545,12 +543,12 @@ Bite,tough,20,FALSE,
 Sludge,tough,20,FALSE,
 Bug Buzz,beauty,21,FALSE,
 Ice Beam,beauty,21,FALSE,
-Inferno,beauty,21,TRUE,Hex
+Inferno,beauty,21,TRUE,Hex|Infernal Parade
 Lumina Crash,beauty,21,FALSE,
 Moonblast,beauty,21,FALSE,
 Psyshock,beauty,21,FALSE,
 Giga Drain,clever,21,FALSE,
-Toxic Thread,clever,21,TRUE,Electroweb|Hex|Spider Web|Sticky Web|Venom Drench|Venoshock
+Toxic Thread,clever,21,TRUE,Barb Barrage|Electroweb|Hex|Infernal Parade|Spider Web|Sticky Web|Venom Drench|Venoshock
 Air Slash,cool,21,FALSE,
 Crush Claw,cool,21,FALSE,
 First Impression,cute,21,FALSE,
@@ -574,21 +572,23 @@ Muddy Water,tough,22,FALSE,
 Rock Slide,tough,22,FALSE,
 Sandsear Storm,tough,22,FALSE,
 Blizzard,beauty,23,FALSE,
-Spore,beauty,23,TRUE,Dream Eater|Hex|Nightmare|Wake-Up Slap
+Spore,beauty,23,TRUE,Dream Eater|Hex|Infernal Parade|Nightmare|Wake-Up Slap
 Eerie Impulse,clever,23,FALSE,
-Hypnosis,clever,23,TRUE,Dream Eater|Hex|Nightmare|Wake-Up Slap
+Hypnosis,clever,23,TRUE,Dream Eater|Hex|Infernal Parade|Nightmare|Wake-Up Slap
 Metal Sound,clever,23,FALSE,
 Nightmare,clever,23,FALSE,
-Sleep Powder,clever,23,TRUE,Dream Eater|Hex|Nightmare|Wake-Up Slap
+Sleep Powder,clever,23,TRUE,Dream Eater|Hex|Infernal Parade|Nightmare|Wake-Up Slap
 Mat Block,cool,23,FALSE,
 Psychic Fangs,cool,23,FALSE,
-Thunder Wave,cool,23,TRUE,Hex|Smelling Salts
-Glare,tough,23,TRUE,Hex|Smelling Salts
+Thunder Wave,cool,23,TRUE,Hex|Infernal Parade|Smelling Salts
+Glare,tough,23,TRUE,Hex|Infernal Parade|Smelling Salts
 Rage,tough,23,FALSE,
 Avalanche,beauty,24,FALSE,
+Electro Shot,beauty,24,FALSE,
 Flame Wheel,beauty,24,FALSE,
 Freeze Shock,beauty,24,FALSE,
 Ice Burn,beauty,24,FALSE,
+Meteor Beam,beauty,24,FALSE,
 Poltergeist,clever,24,FALSE,
 Cross Chop,cool,24,FALSE,
 Drill Peck,cool,24,FALSE,
@@ -620,12 +620,12 @@ Snowscape,beauty,25,TRUE,Aurora Veil|Blizzard|Glaciate|Icicile Crash|Icy Wind|Po
 Eerie Spell,clever,25,FALSE,
 Forest's Curse,clever,25,FALSE,
 Mist Ball,clever,25,FALSE,
-Stun Spore,clever,25,TRUE,Hex|Smelling Salts
+Stun Spore,clever,25,TRUE,Hex|Infernal Parade|Smelling Salts
 Behemoth Blade,cool,25,FALSE,
 Guillotine,cool,25,FALSE,
 Horn Drill,cool,25,FALSE,
 Ruination,cool,25,FALSE,
-Zap Cannon,cool,25,TRUE,Hex|Smelling Salts
+Zap Cannon,cool,25,TRUE,Hex|Infernal Parade|Smelling Salts
 Behemoth Bash,tough,25,FALSE,
 Earthquake,tough,25,FALSE,
 Fissure,tough,25,FALSE,
@@ -677,7 +677,7 @@ Twineedle,cool,27,FALSE,
 Wicked Blow,cool,27,FALSE,
 X-Scissor,cool,27,FALSE,
 Entrainment,cute,27,TRUE,Circle Throw|Seismic Toss|Sky Drop|Smack Down|Storm Throw|Vital Throw
-Nuzzle,cute,27,TRUE,Hex|Smelling Salts
+Nuzzle,cute,27,TRUE,Hex|Infernal Parade|Smelling Salts
 Trick-or-Treat,cute,27,FALSE,
 Bonemerang,tough,27,FALSE,
 Double Iron Bash,tough,27,FALSE,
@@ -697,7 +697,7 @@ Oblivion Wing,cool,28,FALSE,
 Draining Kiss,cute,28,FALSE,
 Frost Breath,beauty,29,FALSE,
 Icy Wind,beauty,29,FALSE,
-Lovely Kiss,beauty,29,TRUE,Dream Eater|Hex|Nightmare|Wake-Up Slap
+Lovely Kiss,beauty,29,TRUE,Dream Eater|Hex|Infernal Parade|Nightmare|Wake-Up Slap
 Perish Song,beauty,29,FALSE,
 Powder,clever,29,FALSE,
 Roost,clever,29,FALSE,
@@ -730,16 +730,16 @@ Recover,clever,30,FALSE,
 Reflect Type,clever,30,TRUE,Synchronoise
 Synchronoise,clever,30,FALSE,
 Dragon Cheer,cool,30,FALSE,
+Burning Jealousy,beauty,31,FALSE,
 Haze,beauty,31,FALSE,
 Acid,clever,31,FALSE,
 Core Enforcer,clever,31,FALSE,
 Embargo,clever,31,FALSE,
 Grav Apple,clever,31,FALSE,
-Poison Powder,clever,31,TRUE,Hex|Venom Drench|Venoshock
+Poison Powder,clever,31,TRUE,Barb Barrage|Hex|Infernal Parade|Venom Drench|Venoshock
 Poison Tail,clever,31,FALSE,
-Toxic,clever,31,TRUE,Hex|Venom Drench|Venoshock
+Toxic,clever,31,TRUE,Barb Barrage|Hex|Infernal Parade|Venom Drench|Venoshock
 Venom Drench,clever,31,FALSE,
-Burning Jealousy,cool,31,FALSE,
 Spicy Extract,cool,31,FALSE,
 Spirit Break,cool,31,FALSE,
 Alluring Voice,cute,31,FALSE,
@@ -767,9 +767,9 @@ Signal Beam,beauty,32,FALSE,
 Sparkling Aria,beauty,32,FALSE,
 Strange Steam,beauty,32,FALSE,
 Water Pulse,beauty,32,FALSE,
-Will-O-Wisp,beauty,32,TRUE,Hex
+Will-O-Wisp,beauty,32,TRUE,Hex|Infernal Parade
 Corrosive Gas,clever,32,FALSE,
-Poison Gas,clever,32,TRUE,Hex|Venom Drench|Venoshock
+Poison Gas,clever,32,TRUE,Barb Barrage|Hex|Infernal Parade|Venom Drench|Venoshock
 Rock Tomb,clever,32,FALSE,
 Screech,clever,32,FALSE,
 Supersonic,clever,32,FALSE,

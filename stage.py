@@ -63,11 +63,11 @@ class Stage:
                 contestant.changeScore(-10)
             #if the move's category is not primary or secondary to this contest's category, lower excitement and subtract a heart
             elif contestant.currMove.effectIndex != 17 and contestant.currMove.category != self.category and contestant.currMove.category not in contestMove.categorySecondaryType[self.category]:
-                #lower excitement by 2 instead of 1 if the move description is 'Makes the audience quickly grow bored when an appeal move has little effect' (need further research to see if this effect is correct)
+                #lower excitement and hearts by 2 instead of 1 if the move description is 'Makes the audience quickly grow bored when an appeal move has little effect'
                 if contestant.currMove.effectIndex == 29:
                     print("But "+ contestant.name + "'s show of " + categoryNouns[contestant.currMove.category] + " went very poorly with this audience...")
                     change = -2
-                    contestant.changeScore(-10)
+                    contestant.changeScore(-20)
                 else:
                     print("But "+ contestant.name + "'s show of " + categoryNouns[contestant.currMove.category] + " didn't go over very well with this audience.")
                     change = -1

@@ -32,12 +32,12 @@ Each row of the csv file has different Pokemon presets for each contest category
 
 The data fields for your Pokemon are:
 
-1. name: *the nickname of your Pokemon*
-2. species: *the species of your Pokemon*
-3. contest condition stats (coolStat, toughStat, etc): *The Pokemon with the highest contest condition stats will move earlier during the first round of the game. Realistically, these values should be integer between 0 - 255 inclusive, and one of these values can go up to 275 if the Pokemon would not use a mega stone to mega evolve.*
-4. moves (move1, move2, etc): *These are the names of the moves that you want your Pokemon to learn.*
-5. canMega: *write TRUE if your Pokemon is capable of mega evolution, and FALSE otherwise*
-6. types (type1, type2): *The type(s) of your Pokemon species, such as Grass, Fire, Water, etc. For Pokemon that can mega evolve, write the types that match the mega-evolved form. If your Pokemon does not have a secondary type, leave the cell under the type2 column blank.*
+1. **name**: *the nickname of your Pokemon*
+2. **species**: *the species of your Pokemon*
+3. **contest condition stats** (coolStat, toughStat, etc): *The Pokemon with the highest contest condition stats will move earlier during the first round of the game. Realistically, these values should be integer between 0 - 255 inclusive, and one of these values can go up to 275 if the Pokemon would not use a mega stone to mega evolve.*
+4. **moves** (move1, move2, etc): *These are the names of the moves that you want your Pokemon to learn.*
+5. **canMega**: *write TRUE if your Pokemon is capable of mega evolution, and FALSE otherwise*
+6. **types** (type1, type2): *The type(s) of your Pokemon species, such as Grass, Fire, Water, etc. For Pokemon that can mega evolve, write the types that match the mega-evolved form. If your Pokemon does not have a secondary type, leave the cell under the type2 column blank.*
 
 </details>
 

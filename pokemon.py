@@ -141,6 +141,7 @@ class Pokemon:
         self.isMega = False
         self.isExpectingCombo = False
         self.easyStartle = False
+        self.isRecharging = False
     
     #used for determining turn order. If two pokemon would be tied for their turn order, randomly pick which one of the two will go earlier
     def __gt__(self, other):
@@ -174,8 +175,9 @@ class Pokemon:
             print(self.name + " the " + self.species + " is knocked out and can no longer move.")
             self.isExpectingCombo = False
         #if the pokemon used a move the previous round that requires it to recharge this round, skip its turn
-        elif self.prevMove is not None and self.prevMove.effectIndex == 12:
+        elif self.isRecharging == True:
             print("All " + self.name + " the " + self.species + " can do is watch the others.")
+            self.isRecharging = False
             self.isExpectingCombo = False
         #if the pokemon is nervous, skip its turn
         elif self.isNervous == True:
@@ -303,6 +305,10 @@ class Pokemon:
             elif self.currMove.effectIndex == 11:
                 print(self.name + " will startle more easily this round.")
                 self.easyStartle = True
+            #recharge next turn
+            elif self.currMove.effectIndex == 12:
+                print(self.name + " will need to recharge during the next round.")
+                self.isRecharging = True
             #self KO
             elif self.currMove.effectIndex == 13:
                 print(self.name + " will be unable to use any moves after this!")
@@ -481,7 +487,8 @@ class Pokemon:
     def nextRound(self):
         #update with values from the round that we just completed
         self.currScore = max(0, self.currScore + self.tempScore)
-        self.prevMove = self.currMove
+        if self.currMove is not None:
+            self.prevMove = self.currMove
         
         #reset values in preperation for the next round
         self.tempScore = 0

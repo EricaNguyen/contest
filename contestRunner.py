@@ -137,10 +137,12 @@ for i in range (0, 5):
     print("-")
     #list the moves that the user can choose from
     for j in range (0, 4):
-        #print an asterisk in front of moves that complete a combo this turn
+        #print an asterisk in front of moves that complete a combo this turn, print an x if the move was just used last time
         seperatorMark = " - "
         if mon1.isExpectingCombo == True and mon1.prevMove != None and mon1.moves[j] in mon1.prevMove.combosWith:
             seperatorMark = " * "
+        elif mon1.prevMove != None and mon1.prevMove.name == mon1.moves[j]:
+            seperatorMark = " x "
         print(str(j) + seperatorMark + str(contestMove.moveList[mon1.moves[j]]))
     choice = input()
     #prompt the user again if their input is invalid
@@ -153,6 +155,8 @@ for i in range (0, 5):
             seperatorMark = " - "
             if mon1.isExpectingCombo == True and mon1.prevMove != None and mon1.moves[j] in mon1.prevMove.combosWith:
                 seperatorMark = " * "
+            elif mon1.prevMove != None and mon1.prevMove.name == mon1.moves[j]:
+                seperatorMark = " x "
             print(str(j) + seperatorMark + str(contestMove.moveList[mon1.moves[j]]))
         choice = input()
         
@@ -162,7 +166,7 @@ for i in range (0, 5):
             myStage.getMonsInTurnOrder()[i].doMove(int(choice), i, myStage.getMonsInTurnOrder(), myStage.excitementLevel) #player performs a move
         else:
             myStage.getMonsInTurnOrder()[i].doMove(random.randint(0,3), i, myStage.getMonsInTurnOrder(), myStage.excitementLevel) #NPC performs a random move
-        myStage.updateExcitementLevel(myStage.getMonsInTurnOrder()[i], i) #update audience excitement level
+        myStage.updateExcitementLevel(myStage.getMonsInTurnOrder()[i], i) #update audience excitement level after performing a move
         print()
     
     #move on to the next round

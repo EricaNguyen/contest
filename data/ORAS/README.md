@@ -43,6 +43,70 @@ The document contains information on all the moves available for the `ORAS` game
 | 34 | Shows off the Pokemon's appeal about as well as the move used just before it. | Earns the same amount of hearts as the contestant who went right before the user, plus 1 heart. <br/>Minimum amount of hearts earned is 1. | 1 | 0 | N/A | <ul><li>Drain Punch</li><li>Horn Leech</li><li>Thief</li></ul> | N/A | <ul><li>Foul Play</li><li>Leech Life</li><li>Mirror Move</li><li>Recycle</li><li>Sketch</li><li>Skill Swap</li><li>Snatch</li></ul> | <ul><li>Copycat</li><li>Covet</li><li>Mimic</li><li>Role Play</li></ul> |
 | 35 | Scrambles the order in which Pokemon will move on the next turn. | The turn order for all contestants is random in the next round. | 3 | 0 | N/A | N/A | N/A | <ul><li>Ally Switch</li><li>Topsy-Turvy</li><li>Trick Room</li><li>Wonder Room</li></ul> | N/A |
 
-## List of move combos
+## List of move combos (ORAS)
 
-Check out [Serebii's page on contest combos](https://www.serebii.net/omegarubyalphasapphire/contestcombos.shtml) for a full list of move combos in ORAS.
+| Combo starter | Combo finisher |
+| --- | --- |
+| Agility | Baton Pass, Electro Ball |
+| Amnesia | Baton Pass, Stored Power |
+| Autotomize | Baton Pass, Electro Ball |
+| Block | Explosion, Memento, Perish Song, Self-Destruct |
+| Calm Mind | Baton Pass, Stored Power |
+| Celebrate | Bestow, Fling, Present |
+| Charge | Bolt Strike, Charge Beam, Discharge, Electro Ball, Fusion Bolt, Nuzzle, Parabolic Charge, Shock Wave, Spark, Thunder, Thunder Fang, Thunder Punch, Thunder Shock, Thunderbolt, Volt Switch, Volt Tackle |
+| Cotton Guard | Baton Pass, Stored Power |
+| Covet | Bestow, Fling, Present |
+| Dark Void | Dream Eater, Hex, Nightmare, Wake-Up Slap |
+| Defense Curl | Rollout, Ice Ball |
+| Encore | Counter, Destiny Bond, Grudge, King's Shield, Metal Burst, Mirror Coat, Spite |
+| Endure | Endeavor, Flail, Reversal, Pain Split |
+| Entrainment | Circle Throw, Seismic Toss, Sky Drop, Smack Down, Storm Throw, Vital Throw |
+| Focus Energy | Aeroblast, Attack Order, Blaze Kick, Cross Poison, Drill Run, Karate Chop, Leaf Blade, Night Slash, Poison Tail, Psycho Cut, Shadow Claw, Spacial Rend, Stone Edge |
+| Force Palm | Hex, Smelling Salts |
+| Glare | Hex, Smelling Salts |
+| Grass Whistle | Dream Eater, Hex, Nightmare, Wake-Up Slap |
+| Hail | Blizzard, Glaciate, Icicile Crash, Icy Wind, Powder Snow, Weather Ball |
+| Happy Hour | Bestow, Fling, Present |
+| Hold Hands | Circle Throw, Seismic Toss, Sky Drop, Smack Down, Storm Throw, Vital Throw |
+| Hone Claws | Baton Pass, Stored Power |
+| Hypnosis | Dream Eater, Hex, Nightmare, Wake-Up Slap |
+| Inferno | Hex |
+| Lock-On | Fissure, Guillotine, Horn Drill, Sheer Cold |
+| Lovely Kiss | Dream Eater, Hex, Nightmare, Wake-Up Slap |
+| Mean Look | Explosion, Memento, Perish Song, Self-Destruct |
+| Mind Reader | Fissure, Guillotine, Horn Drill, Sheer Cold |
+| Miracle Eye | Fissure, Guillotine, Horn Drill, Sheer Cold |
+| Nasty Plot | Baton Pass, Stored Power |
+| Nuzzle | Hex, Smelling Salts |
+| Parabolic Charge | Electrify |
+| Play Nice | Circle Throw, Seismic Toss, Sky Drop, Smack Down, Storm Throw, Vital Throw, Wake-Up Slap |
+| Poison Gas | Hex, Venom Drench, Venoshock |
+| Poison Powder | Hex, Venom Drench, Venoshock |
+| Rain Dance | Hurricane, Soak, Thunder, Water Sport, Weather Ball |
+| Reflect Type | Synchronoise |
+| Rest | Snore, Sleep Talk |
+| Rock Polish | Baton Pass, Electro Ball |
+| Rototiller | Bullet Seed, Leech Seed, Seed Bomb, Worry Seed |
+| Sandstorm | Sand Attack, Sand Tomb, Weather Ball |
+| Shell Smash | Baton Pass, Electro Ball |
+| Shift Gear | Gear Grind |
+| Sing | Dream Eater, Hex, Nightmare, Wake-Up Slap |
+| Sleep Powder | Dream Eater, Hex, Nightmare, Wake-Up Slap |
+| Soft-Boiled | Egg Bomb |
+| Spider Web | Explosion, Memento, Perish Song, Self-Destruct |
+| Spikes | Circle Throw, Dragon Tail, Roar, Whirlwind |
+| Spore | Dream Eater, Hex, Nightmare, Wake-Up Slap |
+| Stealth Rock | Circle Throw, Dragon Tail, Whirlwind, Roar |
+| Stockpile | Spit Up, Swallow |
+| String Shot | Electroweb, Spider Web, Sticky Web |
+| Stun Spore | Hex, Smelling Salts |
+| Sunny Day | Growth, Moonlight, Morning Sun, Solar Beam, Synthesis, Weather Ball |
+| Taunt | Counter, Destiny Bond, Grudge, King's Shield, Metal Burst, Mirror Coat, Spite |
+| Thunder Wave | Hex, Smelling Salts |
+| Torment | Counter, Destiny Bond, Grudge, King's Shield, Metal Burst, Mirror Coat, Spite |
+| Toxic | Hex, Venom Drench, Venoshock |
+| Toxic Spikes | Hex, Venom Drench, Venoshock, Circle Throw, Dragon Tail, Roar, Whirlwind |
+| Will-O-Wisp | Hex |
+| Wish | Bestow, Fling, Present |
+| Yawn | Dream Eater, Hex, Nightmare, Wake-Up Slap |
+| Zap Cannon | Hex, Smelling Salts |

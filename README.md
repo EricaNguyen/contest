@@ -28,14 +28,14 @@ You can change the game modes and your Pokemon before running the program.
 <summary>How to change your Pokemon</summary>
 
 **To change your Pokemon**, go to the folder `data/<your desired game mode>` and edit `player_data.csv` using a spreadsheet application (ex: Google Sheets, Microsoft Excel, etc).
-Each row of the csv file has different Pokemon presets for each contest category. Feel free to edit the Pokemon data for whichever contest categories you want to play. Make sure the data is spelled correctly and has correct capitalization.
+Each row of the csv file has different Pokemon presets for each contest category. Feel free to edit the Pokemon data for whichever contest categories you want to play. Make sure the data entries are spelled correctly and have correct capitalization.
 
 The data fields for your Pokemon are:
 
 1. **name**: *the nickname of your Pokemon*
 2. **species**: *the species of your Pokemon*
 3. **contest condition stats** (coolStat, toughStat, etc): *The Pokemon with the highest contest condition stats will move earlier during the first round of the game. Realistically, these values should be integer between 0 - 255 inclusive, and one of these values can go up to 275 if the Pokemon would not use a mega stone to mega evolve.*
-4. **moves** (move1, move2, etc): *These are the names of the moves that you want your Pokemon to learn.*
+4. **moves** (move1, move2, etc): *These are the names of the moves that you want your Pokemon to learn. Check out the list of moves and their effects for [ORAS](data/ORAS/README.md) and [NatDex](data/NatDex/README.md).*
 5. **canMega**: *write TRUE if your Pokemon is capable of mega evolution, and FALSE otherwise*
 6. **types** (type1, type2): *The type(s) of your Pokemon species, such as Grass, Fire, Water, etc. For Pokemon that can mega evolve, write the types that match the mega-evolved form. If your Pokemon does not have a secondary type, leave the cell under the type2 column blank.*
 

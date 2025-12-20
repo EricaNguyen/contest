@@ -1,5 +1,7 @@
 # Move descriptions
 
+Below is a list of possible move effects. For a list of moves and move combos available in the game, check out the README files for [ORAS](ORAS/README.md) or [NatDex](NatDex/README.md).
+
 | ID | In-game description | Detailed description | Appeal | Jam |
 | --- | --- | --- | --- | --- |
 | 0 | Quite an appealing move. | No additional effect. | 4 | 0 |

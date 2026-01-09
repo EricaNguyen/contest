@@ -79,7 +79,7 @@ The document contains information on all the moves available for the `NatDex` ga
 | Grass Whistle | Dream Eater, Hex, Infernal Parade, Nightmare, Wake-Up Slap |
 | Grassy Terrain | Camouflage, Floral Healing, Grassy Glide, Nature Power, Secret Power, Terrain Pulse |
 | Gravity | Grav Apple |
-| Hail | Aurora Veil, Blizzard, Glaciate, Icicile Crash, Icy Wind, Powder Snow, Weather Ball |
+| Hail | Aurora Veil, Blizzard, Glaciate, Icicle Crash, Icy Wind, Powder Snow, Weather Ball |
 | Happy Hour | Bestow, Fling, Present |
 | Hold Hands | Circle Throw, Seismic Toss, Sky Drop, Smack Down, Storm Throw, Vital Throw |
 | Hone Claws | Baton Pass, Stored Power |
@@ -113,7 +113,7 @@ The document contains information on all the moves available for the `NatDex` ga
 | Shift Gear | Gear Grind |
 | Sing | Dream Eater, Hex, Infernal Parade, Nightmare, Wake-Up Slap |
 | Sleep Powder | Dream Eater, Hex, Infernal Parade, Nightmare, Wake-Up Slap |
-| Snowscape | Aurora Veil, Blizzard, Glaciate, Icicile Crash, Icy Wind, Powder Snow, Weather Ball |
+| Snowscape | Aurora Veil, Blizzard, Glaciate, Icicle Crash, Icy Wind, Powder Snow, Weather Ball |
 | Soft-Boiled | Egg Bomb |
 | Spider Web | Explosion, Memento, Misty Explosion, Perish Song, Self-Destruct |
 | Spikes | Circle Throw, Dragon Tail, Roar, Whirlwind |

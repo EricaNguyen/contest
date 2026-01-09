@@ -65,7 +65,7 @@ The document contains information on all the moves available for the `ORAS` game
 | Force Palm | Hex, Smelling Salts |
 | Glare | Hex, Smelling Salts |
 | Grass Whistle | Dream Eater, Hex, Nightmare, Wake-Up Slap |
-| Hail | Blizzard, Glaciate, Icicile Crash, Icy Wind, Powder Snow, Weather Ball |
+| Hail | Blizzard, Glaciate, Icicle Crash, Icy Wind, Powder Snow, Weather Ball |
 | Happy Hour | Bestow, Fling, Present |
 | Hold Hands | Circle Throw, Seismic Toss, Sky Drop, Smack Down, Storm Throw, Vital Throw |
 | Hone Claws | Baton Pass, Stored Power |

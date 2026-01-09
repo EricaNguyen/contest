@@ -88,7 +88,7 @@ categorySecondaryType = {
     "cute": ["beauty", "clever"]
 }
 
-#read csv file containing data for all moves
+#reads a csv file containing data for all moves, then populates the moveList dictionary accordingly.
 def readMoveData(filename):
     with open(filename, newline='') as csvfile:
         reader = csv.DictReader(csvfile)

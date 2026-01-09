@@ -466,9 +466,9 @@ class Pokemon:
     #add/subtract hearts for the current round. 1 heart = 10 points 
     def changeScore(self, scoreChange):
         if scoreChange < 0:
-            print(self.name + " lost " + str(int(scoreChange/10)) + " heart(s)...")
+            print(">> " + self.name + " lost " + str(int(scoreChange/10)) + " heart(s)...")
         else:
-            print(self.name + " gained +" + str(int(scoreChange/10)) + " heart(s)!")
+            print(">> " + self.name + " gained +" + str(int(scoreChange/10)) + " heart(s)!")
         self.tempScore += scoreChange
         
     #change pumpedUp value

@@ -1,6 +1,7 @@
 import contestMove
 import random
 import math
+import time
 
 #dictionary of flavor text for Spectacular Talent moves
 SpecMoves = {
@@ -127,9 +128,9 @@ class Pokemon:
         self.gameStart = False
         
         #init without params
-        self.currScore = 0
-        self.tempScore = 0
-        self.totalScore = 0
+        self.currScore = 0 #the current score for all rounds so far
+        self.tempScore = 0 #the points earned in just the current round
+        self.totalScore = 0 #calculated from condition and currScore
         self.prevMove = None
         self.currMove = None
         self.isNervous = False
@@ -143,7 +144,7 @@ class Pokemon:
         self.easyStartle = False
         self.isRecharging = False
     
-    #used for determining turn order. If two pokemon would be tied for their turn order, randomly pick which one of the two will go earlier
+    #custom greater-than function used for determining turn order. If two pokemon would be tied for their turn order, randomly pick which one of the two will go earlier
     def __gt__(self, other):
         #for the first round, compare condition
         if self.gameStart == False:
@@ -161,7 +162,7 @@ class Pokemon:
             else:
                 return self.tempScore > other.tempScore
         
-    #perform a move
+    #performs a move
     def doMove(self, moveIndex, currTurnOrder, contestantsList, currExcitementLevel):
         self.doAppeal(moveIndex, currTurnOrder, contestantsList, currExcitementLevel)
         self.doJam(currTurnOrder, contestantsList)
@@ -172,27 +173,31 @@ class Pokemon:
         #check if this pokemon is able to move this round
         #if the pokemon is knocked out, skip its turn
         if self.isKOd == True:
-            print(self.name + " the " + self.species + " is knocked out and can no longer move.")
+            self.dynamicPrint(self.name + " the " + self.species + " is knocked out and can no longer move.\n")
             self.isExpectingCombo = False
         #if the pokemon used a move the previous round that requires it to recharge this round, skip its turn
         elif self.isRecharging == True:
-            print("All " + self.name + " the " + self.species + " can do is watch the others.")
+            self.dynamicPrint("All " + self.name + " the " + self.species + " can do is watch the others.\n")
             self.isRecharging = False
             self.isExpectingCombo = False
         #if the pokemon is nervous, skip its turn
         elif self.isNervous == True:
-            print(self.name + " the " + self.species + " was too nervous to move!")
+            self.dynamicPrint(self.name + " the " + self.species + " was too nervous to move!\n")
             self.isExpectingCombo = False
         #otherwise, carry out its move
         else:
-            self.currMove = contestMove.moveList[self.moves[moveIndex]] #get move data from the moveList dictionary stored in contestMove.py
-            print(self.name + " the " + self.species + " tried to show its appeal with " + self.currMove.name + "!")
+            #assign a Move object as the current move. The move's data is from the moveList dictionary that is stored in contestMove.py
+            self.currMove = contestMove.moveList[self.moves[moveIndex]] 
+
+            self.dynamicPrint(self.name + " the " + self.species + " tried to show its appeal with " + self.currMove.name + "!\n")
             
             
-            # === BASE APPEAL POINTS ===
-            #calculate the appeal points earned for the move
+            # === CALCULATE APPEAL POINTS ===
+            #apply base appeal points
             temp = self.currMove.appeal
             flavorText = ""
+            
+            #calculate bonus appeal points for this move. Bonus points that come from the audience excitement level instead of the move itself are handled in stage.py
             #extra points for moves that work great if the user goes first
             if self.currMove.effectIndex == 7 and currTurnOrder == 0:
                 flavorText = "The standout leader, " + self.name + ", really tried to show off its appeal!"
@@ -201,7 +206,7 @@ class Pokemon:
             elif self.currMove.effectIndex == 8 and currTurnOrder == 3:
                 flavorText = self.name + " hadn't been standing out much, but really gave its all this time!"
                 temp += 40
-            #contestant earns 0,1,3,5 extra hearts moves that work better the later it is used in a turn
+            #contestant earns 0,1,3,5 extra hearts for moves that work better the later it is used in a turn
             elif self.currMove.effectIndex == 9:
                 if currTurnOrder == 0:
                     pass
@@ -214,7 +219,7 @@ class Pokemon:
                 else:
                     flavorText = self.name + " showed off its appeal fantastically well!"
                     temp += 50
-            #extra random hearts for moves that "vary depending on when it is used" (yes, it's a misleading description from the OG games...)
+            #extra hearts of a random amount for moves that "vary depending on when it is used" (yes, it's a misleading description from the OG games...)
             elif self.currMove.effectIndex == 10:
                 bonus = 2 * random.randint(0, 4) - 1
                 if bonus <= 0:
@@ -227,7 +232,6 @@ class Pokemon:
                     temp += bonus * 10
             #if the move depends on the audience's current excitement level, contestant earns 0,2,3,5 extra hearts for 0,2,3,4 excitement level
             elif (self.currMove.effectIndex == 18):
-                #bonus hearts based on audience excitement level
                 if currExcitementLevel <= 1:
                     flavorText = self.name + " didn't show off its appeal well."
                 elif currExcitementLevel == 2 or currExcitementLevel == 3:
@@ -274,7 +278,7 @@ class Pokemon:
             else:
                 temp += self.pumpedUp*10
                 
-            #add initial appeal score to this round's score
+            #update this pokemon's score for this round
             self.changeScore(temp)
             
             #print flavor text
@@ -282,8 +286,8 @@ class Pokemon:
                 print(flavorText)
             
             
-            # === SECONDARY EFFECTS ===
-            #additional effects that apply only to the user. Effects that affect other pokemon are handled the methods doJam and makeOthersNervous
+            # === APPLY SECONDARY EFFECTS ===
+            #carry out additional move effects that apply only to the user. Effects that affect other pokemon are handled the methods doJam and makeOthersNervous
             #sets priority
             if self.currMove.effectIndex == 1:
                 print(self.name + " will move first in the next round.")
@@ -334,59 +338,27 @@ class Pokemon:
                 self.isExpectingCombo = False
     
     
-    #carry out the jamming effect of the pokemon's move
+    #carry out the jamming effect of this pokemon's move onto other contestants
     def doJam(self, currTurnOrder, contestantsList):
         if not (self.currMove == None or self.currMove.jamTarget == "no jam" or currTurnOrder == 0):
             #flavor text
             if self.currMove.jam < 0:
                 print(self.name + " tried to startle the other Pokemon!")
                 
-            #startles only the pokemon in front
+            #if the move startles only the pokemon in front
             if self.currMove.jamTarget == 'front':
-                #check if pokemon in front should be startled
-                if contestantsList[currTurnOrder-1].isCalm == True:
-                    print(contestantsList[currTurnOrder-1].name + " was not startled.")
-                    contestantsList[currTurnOrder-1].isCalm = False
-                elif contestantsList[currTurnOrder-1].isVeryCalm == True:
-                    print(contestantsList[currTurnOrder-1].name + " is completely oblivious to any attempts to startle.")
-                else:
-                    print(contestantsList[currTurnOrder-1].name + " was startled!")
-                    if contestantsList[currTurnOrder-1].easyStartle == True:
-                        contestantsList[currTurnOrder-1].changeScore(2 * self.currMove.jam)
-                    else:
-                        contestantsList[currTurnOrder-1].changeScore(self.currMove.jam)
-            #startles all pokemon in front
+                #call helper method to carry out point loss from jamming
+                self.jamHelper(contestantsList[currTurnOrder-1], self.currMove.jam)
+            #if the move startles all pokemon in front
             elif self.currMove.jamTarget == 'all':
                 for i in range(0, currTurnOrder):
-                    #check if the pokemon should be startled
-                    if contestantsList[i].isCalm == True:
-                        print(contestantsList[i].name + " was not startled.")
-                        contestantsList[i].isCalm = False
-                    elif contestantsList[i].isVeryCalm == True:
-                        print(contestantsList[i].name + " is completely oblivious to any attempts to startle.")
-                    else:
-                        print(contestantsList[i].name + " was startled!")
-                        if contestantsList[i].easyStartle == True:
-                            contestantsList[i].changeScore(2 * self.currMove.jam)
-                        else:
-                            contestantsList[i].changeScore(self.currMove.jam)
+                    self.jamHelper(contestantsList[i], self.currMove.jam)
             #if jamming amount is dependent on how successful the other contestants are
             elif self.currMove.jamTarget == 'successful':
                 for i in range(0, currTurnOrder):
-                    #check if the pokemon should be startled
-                    if contestantsList[i].isCalm == True:
-                        print(contestantsList[i].name + " was not startled.")
-                        contestantsList[i].isCalm = False
-                    elif contestantsList[i].isVeryCalm == True:
-                        print(contestantsList[i].name + " is completely oblivious to any attempts to startle.")
-                    else:
-                        #jam for half of the pokemon's score this round, rounded down to the nearest 10. Minimum jam amount of 10
-                        print(contestantsList[i].name + " was startled!")
-                        jamAmount = max(10, int(contestantsList[i].tempScore / 20) * 10) * -1
-                        if contestantsList[i].easyStartle == True:
-                            contestantsList[i].changeScore(2 * jamAmount)
-                        else:
-                            contestantsList[i].changeScore(jamAmount)
+                    #jam for half of the pokemon's score this round, rounded down to the nearest 10. Minimum jam amount of 10
+                    jamAmount = max(10, int(contestantsList[i].tempScore / 20) * 10) * -1
+                    self.jamHelper(contestantsList[i], jamAmount)
             #if jamming effect is dependent on whether the other contestants are starting a combo
             elif self.currMove.jamTarget == 'high expectation':
                 if self.currMove.jam >= 0: #make audience lose expectations of a combo
@@ -401,20 +373,10 @@ class Pokemon:
                         print("But it failed!")
                 else: #badly startles pokemon that are starting a combo
                     for i in range(0, currTurnOrder): 
-                        #check if the pokemon should be startled
-                        if contestantsList[i].isCalm == True:
-                            print(contestantsList[i].name + " was not startled.")
-                            contestantsList[i].isCalm = False
-                        elif contestantsList[i].isVeryCalm == True:
-                            print(contestantsList[i].name + " is completely oblivious to any attempts to startle.")
-                        else:
-                            print(contestantsList[i].name + " was startled!")
-                            jamAmount = self.currMove.jam
-                            if contestantsList[i].isExpectingCombo == True:
-                                jamAmount -= 40
-                            if contestantsList[i].easyStartle == True:
-                                jamAmount *= 2
-                            contestantsList[i].changeScore(jamAmount)
+                        jamAmount = self.currMove.jam
+                        if contestantsList[i].isExpectingCombo == True:
+                            jamAmount -= 40
+                        self.jamHelper(contestantsList[i], jamAmount)
             #if the move doesn't cause other pokemon to lose hearts, but instead lowers their pumpedUp stat
             elif self.currMove.jamTarget == 'energy only':
                 print("It tried to taunt the Pokemon that are feeling pumped up!")
@@ -428,26 +390,31 @@ class Pokemon:
             #if jamming amount is dependent on matching the move type of the other contestants
             elif self.currMove.jamTarget == 'same type':
                 for i in range(0, currTurnOrder):
-                    #check if the pokemon should be startled
-                    if contestantsList[i].isCalm == True:
-                        print(contestantsList[i].name + " was not startled.")
-                        contestantsList[i].isCalm = False
-                    elif contestantsList[i].isVeryCalm == True:
-                        print(contestantsList[i].name + " is completely oblivious to any attempts to startle.")
-                    else:
-                        #badly startles pokemon that used a move of the same contest type
-                        print(contestantsList[i].name + " was startled!")
-                        jamAmount = self.currMove.jam
-                        if contestantsList[i].currMove != None and contestantsList[i].currMove.category == self.currMove.category:
-                            jamAmount -= 30
-                        if contestantsList[i].easyStartle == True:
-                            jamAmount *= 2
-                        contestantsList[i].changeScore(jamAmount)
+                    #badly startles pokemon that used a move of the same contest type
+                    jamAmount = self.currMove.jam
+                    if contestantsList[i].currMove != None and contestantsList[i].currMove.category == self.currMove.category:
+                        jamAmount -= 30
+                    self.jamHelper(contestantsList[i], jamAmount)
             #else
             else:
                 print("Need to write implementation for jam target: " + self.currMove.jamTarget)
                 
-                
+    #helper method for jamming. Causes the target contestant to lose jamAmount of points.
+    def jamHelper(self, target, jamAmount):
+        adjustedJamAmount = jamAmount
+        #check if the jam target should be startled
+        if target.isCalm == True:
+            print(target.name + " was not startled.")
+            target.isCalm = False
+        elif target.isVeryCalm == True:
+            print(target.name + " is completely oblivious to any attempts to startle.")
+        else:
+            print(target.name + " was startled!")
+            #if the target is easily startled, it loses double the amount of points
+            if target.easyStartle == True:
+                adjustedJamAmount *= 2
+            target.changeScore(adjustedJamAmount) #update the target's score for this round
+        
     #make the other pokemon going after this pokemon nervous
     def makeOthersNervous(self, currTurnOrder, contestantsList):
         if not(self.currMove == None or self.currMove.effectIndex != 14 or currTurnOrder == 3):
@@ -499,7 +466,7 @@ class Pokemon:
         self.currMove = None
         self.easyStartle = False
     
-    #calculate the condition score based on the pokemon's contest stats
+    #calculate the condition score based on the pokemon's contest stats. Condition = primary stat + half of each secondary stat
     def calcCondition(self, category):
         if category == "cool":
             self.condition = self.coolStat + 0.5 * self.toughStat + 0.5 * self.beautyStat
@@ -521,10 +488,11 @@ class Pokemon:
         
     #implement bonus points, mega evolution, and flavor text when this pokemon performs a Spectacular Talent (called by stage.py when this pokemon maxes out the audience meter)
     def doSpectacular(self, category):
-        #make the element type of the spectacular talent the same as the pokemon. If the pokemon is dual-typed, choose randomly between the two types with the odds weighed in favor of the primary type
+        #make the element type of the spectacular talent the same as this pokemon's type. If the pokemon is dual-typed, choose randomly between its two types, with the odds weighed in favor of the primary type
         spectacularType = self.types[0]
         if len(self.types) > 1:
             spectacularType = random.choices(population=self.types, weights=[0.75, 0.25], k=1)[0]
+        flavorText = "This is it! Time for a Spectacular Talent! " + SpecMoves[category][spectacularType].upper() + "!!\n"
             
         #give 5 bonus hearts (8 bonus hearts if the pokemon mega evolves)
         if self.canMega == True:
@@ -532,9 +500,14 @@ class Pokemon:
                 self.isMega = True
                 self.species = "Mega " + self.species
                 print(self.name + " mega evolved into " + self.species + "!")
-            print("This is it! Time for a Spectacular Talent! " + SpecMoves[category][spectacularType].upper() + "!!")
+            self.dynamicPrint(flavorText)
             self.changeScore(80)
         else:
-            print("This is it! Time for a Spectacular Talent! " + SpecMoves[category][spectacularType].upper() + "!!")
+            self.dynamicPrint(flavorText)
             self.changeScore(50)
-        
+    
+    #helper method to print text dynamically one letter at a time, to build suspense for the player
+    def dynamicPrint(self, text):
+        for i in range(0, len(text)):
+            print(f"\r{text[0:i+1]}", end="", flush=True)
+            time.sleep(0.01) #delay printing by 0.01 seconds

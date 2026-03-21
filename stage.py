@@ -28,7 +28,10 @@ class Stage:
         
         
     def __str__(self):
-        return "\n=======\nCurrent Round #: " + str(self.currRound) + ", Audience excitement level: " + str(self.excitementLevel)
+        extraMessage = ""
+        if self.currRound >= 5:
+            extraMessage = "[It's the FINAL ROUND!]\n"
+        return "\n=======\n" + extraMessage + "Current Round #: " + str(self.currRound) + ", Audience excitement level: " + str(self.excitementLevel)
         
     def printTurnOrderList(self):
         print("Turn order:")
@@ -153,6 +156,16 @@ class Stage:
         for contestant in self.contestants:
             print(contestant.name + " the " + contestant.species + " - Condition: " +str(int(contestant.condition)) + ", Appeal: " + str(int(contestant.currScore * 2)) + ", Total score: " + str(int(contestant.totalScore)))
             
-        #announce the winner. TODO: print multiple winners if there is a tie
+        #announce the winner. Print multiple winners if there is a tie
+        winnerScore = self.contestants[-1].totalScore
+        winnerList = []
+        for contestant in self.contestants:
+            if contestant.totalScore == winnerScore:
+                winnerList.append(contestant)
         print("---")
-        print("CONGRATULATIONS to " + self.contestants[-1].name + " the " + self.contestants[-1].species + " for winning!!!")
+        if len(winnerList) == 1:
+            print("CONGRATULATIONS to " + self.contestants[-1].name + " the " + self.contestants[-1].species + " for winning!!!")
+        else:
+            print("We have a tie! CONGRATULATIONS to our following contestants for winning!!!")
+            for winner in winnerList:
+                print("- " + winner.name + " the " + winner.species)

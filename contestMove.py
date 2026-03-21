@@ -76,10 +76,11 @@ class Move:
         return self.name + " (" + self.category.upper() + ", Appeal: " + str(int(self.appeal/10)) + ", Jam: " + str(int(self.jam/10)) + ")" + ", " + effectDict[self.effectIndex][0]
 
 
-#this dictionary keeps track of the data for all moves
+#this dictionary keeps track of the data for all moves in the game
+#format is moveNameString: moveObject
 moveList = {}
 
-#this dictionary keeps track of which categories are secondary to a given category
+#this dictionary keeps track of which categories are secondary to a given category key
 categorySecondaryType = {
     "cool": ["tough", "beauty"],
     "tough": ["clever", "cool"],

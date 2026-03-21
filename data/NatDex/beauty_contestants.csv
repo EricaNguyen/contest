@@ -1,17 +1,13 @@
 name,species,coolStat,toughStat,beautyStat,cleverStat,cuteStat,move1,move2,move3,move4,canMega,type1,type2
-Aurora,Ninetales,255,255,275,255,255,Snowscape,Blizzard,Aurora Veil,Ice Shard,FALSE,Ice,Fairy
+Yuki,Froslass,255,255,255,255,255,Snowscape,Blizzard,Aurora Veil,Ice Shard,TRUE,Ice,Ghost
 Selene,Cresselia,255,255,275,255,255,Moonlight,Moonblast,Lunar Dance,Lunar Blessing,FALSE,Psychic,
 Dawn,Piplup,255,255,275,255,255,Bubble Beam,Whirlpool,Hydro Pump,Drill Peck,FALSE,Water,
-Sabrina,Delphox,255,255,255,255,255,Mystical Fire,Psybeam,Heat Wave,Round,TRUE,Fire,Psychic
 Perfume,Weezing,255,255,275,255,255,Strange Steam,Misty Terrain,Misty Explosion,Clear Smog,FALSE,Poison,Fairy
-Amaterasu,Volcarona,255,255,275,255,255,Fiery Dance,Quiver Dance,Bug Buzz,Substitute,FALSE,Bug,Fire
 Tsukuyomi,Ursaluna,255,255,275,255,255,Blood Moon,Moonlight,Earth Power,Calm Mind,FALSE,Ground,Normal
 Crystal,Diancie,255,255,255,255,255,Diamond Storm,Moonblast,Dazzling Gleam,Power Gem,TRUE,Rock,Fairy
-Stella,Terapagos,255,255,275,255,255,Tera Starstorm,Ice Beam,Meteor Beam,Ice Spinner,FALSE,Normal,
-Astro,Jirachi,255,255,275,255,255,Cosmic Power,Doom Desire,Flash Cannon,Charge Beam,FALSE,Steel,Psychic
-Sakura,Cherrim,255,255,275,255,255,Petal Dance,Sunny Day,Morning Sun,Weather Ball,FALSE,Grass,
-Fae,Dedenne,255,255,275,255,255,Dazzling Gleam,Discharge,Electroweb,Round,FALSE,Electric,Fairy
+Stella,Terapagos,255,255,275,255,255,Tera Starstorm,Flash Cannon,Meteor Beam,Ice Beam,FALSE,Normal,
 Kokoro,Oricorio,255,255,275,255,255,Revelation Dance,Feather Dance,Safeguard,Quiver Dance,FALSE,Ghost,Flying
 Shoto,White Kyurem,255,255,275,255,255,Fusion Flare,Draco Meteor,Ice Burn,Glaciate,FALSE,Dragon,Ice
 Flame,Typhlosion,255,255,275,255,255,Infernal Parade,Burning Jealousy,Will-O-Wisp,Lava Plume,FALSE,Fire,Ghost
 Flora,Comfey,255,255,275,255,255,Grassy Terrain,Floral Healing,Round,Petal Blizzard,FALSE,Fairy,
+Mermaid,Primarina,255,255,275,255,255,Sparkling Aria,Life Dew,Round,Hydro Cannon,FALSE,Water,Fairy
